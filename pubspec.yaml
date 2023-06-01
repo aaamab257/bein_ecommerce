@@ -1,0 +1,96 @@
+name: bein_ecommerce
+description: A new Flutter project.
+
+publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.2 <3.0.0'
+
+
+dependencies:
+  flutter:
+    sdk: flutter
+  cupertino_icons: ^1.0.2
+  flutter_localizations:
+    sdk: flutter
+
+  bloc: ^8.1.1
+  flutter_bloc: ^8.1.2
+  shared_preferences: ^2.0.18
+  dartz: ^0.10.1
+  image_picker: ^0.8.7
+  extended_image: ^7.0.2
+  equatable: ^2.0.5
+  get_it: ^7.2.0
+  dio: ^5.0.2
+  flutter_screenutil: ^5.7.0
+  internet_connection_checker: ^1.0.0+1
+  cached_network_image: ^3.2.3
+  carousel_slider: ^4.2.1
+  percent_indicator: ^4.2.3
+  flutter_svg: ^2.0.4
+  flutter_slidable: ^0.6.0
+  url_launcher: ^6.0.3
+  flutter_animated_splash: ^0.0.10
+  clippy_flutter: ^2.0.0-nullsafety.1
+  flutter_rating_bar: ^4.0.1
+  flutter_image_slideshow: ^0.1.4
+  video_player: any
+  flutter_staggered_grid_view: ^0.6.2
+  animated_bottom_navigation_bar: ^1.2.0
+  panara_dialogs: ^0.1.4
+  intl: any
+  stomp_dart_client: ^0.4.4
+  flutter_local_notifications: ^9.1.2
+  rxdart: ^0.27.5
+  timezone: any
+  flutter_native_timezone: ^2.0.0
+
+
+
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+  flutter_launcher_icons: ^0.12.0
+
+flutter_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "assets/images/app_icon.png"
+  min_sdk_android: 21 # android min sdk min:16, default 21
+flutter:
+  uses-material-design: true
+
+  assets:
+    - lang/ar.json
+    - lang/en.json
+    - assets/images/
+    - assets/images/banners/
+    - images/
+    - images/marks/
+    - images/products/
+    - assets/
+#    - images/a_dot_ham.jpeg
+
+  fonts:
+    - family: tajawal
+      fonts:
+        - asset: assets/fonts/tajawal/Tajawal-Black.ttf
+          weight: 900
+        - asset: assets/fonts/tajawal/Tajawal-ExtraBold.ttf
+          weight: 800
+        - asset: assets/fonts/tajawal/Tajawal-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/tajawal/Tajawal-Medium.ttf
+          weight: 600
+        - asset: assets/fonts/tajawal/Tajawal-Regular.ttf
+          weight: 500
+        - asset: assets/fonts/tajawal/Tajawal-Light.ttf
+          weight: 400
+        - asset: assets/fonts/tajawal/Tajawal-ExtraLight.ttf
+          weight: 300
