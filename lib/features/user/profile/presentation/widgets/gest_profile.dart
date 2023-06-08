@@ -1,12 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
-
+import 'package:bein_ecommerce/di.dart' as di;
 import '../../../../../config/localization/app_localization.dart';
 import '../../../../../config/route/app_routes.dart';
 import '../../../../../core/shared_widgets/outline_button.dart';
 import '../../../../../core/shared_widgets/solid_button.dart';
 import '../../../../../core/utils/colors/colors_manager.dart';
+import '../../../../on_boarding/presentation/manager/countries_cubit.dart';
 import '../../../auth/login/presentation/pages/login_page.dart';
 
 class GestProfile extends StatefulWidget {
@@ -17,21 +18,44 @@ class GestProfile extends StatefulWidget {
 }
 
 class _GestProfileState extends State<GestProfile> {
+  String iniCountry = '';
+  List<String> countries = [];
+
+@override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+     di.sl<CountriesCubit>().getCurrentCountry().then((value) {
+      iniCountry = value.code;
+      print(
+          'initial Country ===========                        ========= > ${iniCountry}');
+    });
+    //
+
+    di.sl<CountriesCubit>().getCountries().then((value) {
+      for (var country in value) {
+        countries.add(country.code);
+        print('country code ======= ? ${country.code}');
+      }
+    });
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Stack(
                 children: [
                   Positioned(
                       top: 0,
-                      child: Padding(
-                        padding: const EdgeInsets.all(15.0),
-                        child: Container(
-                          width: MediaQuery.of(context).size.width,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
+                      child: Container(
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
                                 AppLocalizations.of(context)?.translate(
                                         "profile_notLogged_title") ??
                                     "profile_notLogged_title",
@@ -39,17 +63,21 @@ class _GestProfileState extends State<GestProfile> {
                                     fontSize: 25,
                                     fontWeight: FontWeight.bold),
                               ),
-                              const SizedBox(
-                                height: 8.0,
-                              ),
-                              Text(
+                            ),
+                            const SizedBox(
+                              height: 8.0,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                              child: Text(
                                 AppLocalizations.of(context)?.translate(
                                         "profile_notLogged_subTitle") ??
                                     "profile_notLogged_subTitle",
-                                style: const TextStyle(fontSize: 16.0),
+
+                                style: const TextStyle(fontSize: 16.0,),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       )),
                   Positioned(
@@ -83,7 +111,7 @@ class _GestProfileState extends State<GestProfile> {
                               PageRouteBuilder(
                                   pageBuilder: (context, animation,
                                           secondaryAnimation) =>
-                                      const LoginPage(),
+                                       LoginPage(countries: countries , iniCountry: iniCountry,),
                                   transitionDuration:
                                       const Duration(seconds: 1),
                                   transitionsBuilder: (context, animation,
@@ -104,7 +132,7 @@ class _GestProfileState extends State<GestProfile> {
                                       ?.translate('login_or_register') ??
                                   "login_or_register",
                               style: const TextStyle(
-                                  fontSize: 16, color: ColorsManager.black),
+                                  fontSize: 16, color: Color(0xff175b88)),
                             ),
                           ),
                           const SizedBox(

@@ -5,6 +5,7 @@ import 'package:bein_ecommerce/features/user/profile/domain/repositories/profile
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/network_checker/network_checker.dart';
+import '../local/models/profile_data_request.dart';
 
 class ProfileRepoImpl implements ProfileRepo{
   NetworkInfo networkInfo;
@@ -29,7 +30,7 @@ class ProfileRepoImpl implements ProfileRepo{
   }
 
   @override
-  Future<Either<Failure, bool>> updateUserData(UserModel userModel) async {
+  Future<Either<Failure, bool>> updateUserData(ProfileDataRequest userModel) async {
     bool isUpdated = false  ;
     if (await networkInfo.isConnected) {
       (await profileRemoteDataSource.updateUserData(userModel)).fold((failure) {

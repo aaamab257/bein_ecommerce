@@ -7,6 +7,8 @@ import 'package:bein_ecommerce/di.dart' as di;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../data/local/models/profile_data_request.dart';
+
 class ProfileCubit extends Cubit<ProfileState> {
   final ProfileUseCase profileUseCase;
 
@@ -37,7 +39,7 @@ class ProfileCubit extends Cubit<ProfileState> {
     return userModel!;
   }
 
-  Future<bool> updateProfile(UserModel model) async {
+  Future<bool> updateProfile(ProfileDataRequest model) async {
     emit(ProfileLoading());
 
     (await profileUseCase.updateUserData(model)).fold((failure) {

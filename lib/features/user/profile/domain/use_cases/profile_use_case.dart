@@ -3,6 +3,7 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../../cart/data/local/models/cart_model.dart';
+import '../../data/local/models/profile_data_request.dart';
 import '../repositories/profile_repo.dart';
 
 class ProfileUseCase {
@@ -16,7 +17,7 @@ class ProfileUseCase {
   }
 
   @override
-  Future<Either<Failure, bool>> updateUserData(UserModel userModel) async {
+  Future<Either<Failure, bool>> updateUserData(ProfileDataRequest userModel) async {
     return await profileRepo.updateUserData(userModel);
   }
 }

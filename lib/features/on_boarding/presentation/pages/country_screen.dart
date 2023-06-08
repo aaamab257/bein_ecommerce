@@ -25,43 +25,46 @@ class _CountryScreenState extends State<CountryScreen> {
 
   @override
   Widget build(BuildContext context) {
-
-
     return BlocProvider(
-            create: (context) => di.sl<CountriesCubit>()..getCountries(),
-            child: BlocConsumer<CountriesCubit, CountriesState>(
-              listener: (context, state) => cubit,
-              builder: (context, state)  {
-                countries = CountriesCubit.get(context).countries;
-                Widget _body1() {
-                  if (state is CountriesLoading) {
-                    return const LoadingScreen();
-                  } else if (state is CountriesError) {
-                    return AppErrorWidget(
-                      onPress: () {
-                        setState(() {});
-                      },
-                    );
-                  } else {
-                    return  CountriesSelection(countries:  countries,);
-                  }
-                }
+      create: (context) => di.sl<CountriesCubit>()..getCountries(),
+      child: BlocConsumer<CountriesCubit, CountriesState>(
+        listener: (context, state) => cubit,
+        builder: (context, state) {
+          countries = CountriesCubit.get(context).countries;
+          Widget _body1() {
+            if (state is CountriesLoading) {
+              return const LoadingScreen();
+            } else if (state is CountriesError) {
+              return AppErrorWidget(
+                onPress: () {
+                  setState(() {});
+                },
+              );
+            } else {
+              return CountriesSelection(
+                countries: countries,
+              );
+            }
+          }
 
-                return Scaffold(
-                  backgroundColor: ColorsManager.background,
-                  body: _body1(),
-                );
-              },
+          return Scaffold(
+            backgroundColor: ColorsManager.background,
+            appBar: AppBar(
+              backgroundColor: ColorsManager.background,
             ),
+            body: _body1(),
           );
-
+        },
+      ),
+    );
   }
 }
 
 class CountriesSelection extends StatefulWidget {
-  final List<CountryEntity> countries ;
+  final List<CountryEntity> countries;
   const CountriesSelection({
-    super.key, required this.countries,
+    super.key,
+    required this.countries,
   });
 
   @override
@@ -74,7 +77,7 @@ class _CountriesSelectionState extends State<CountriesSelection> {
   Widget build(BuildContext context) {
     return Container(
       decoration: const BoxDecoration(
-        /* gradient: LinearGradient(
+          /* gradient: LinearGradient(
           begin: Alignment.topLeft,
           end: Alignment(0.8, 1),
           colors: <Color>[
@@ -83,7 +86,7 @@ class _CountriesSelectionState extends State<CountriesSelection> {
           ],
           tileMode: TileMode.mirror,
         ), */
-      ),
+          ),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -127,16 +130,14 @@ class _CountriesSelectionState extends State<CountriesSelection> {
                                   padding: const EdgeInsets.only(bottom: 16.0),
                                   child: ListTile(
                                     tileColor: ColorsManager.background,
-                                    selectedColor: ColorsManager.black,
-                                    selectedTileColor: ColorsManager.orange,
+                                    selectedColor: ColorsManager.white,
+                                    selectedTileColor: const Color(0xff064A7B),
                                     selected: currentIndex == index,
                                     shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            BorderRadius.circular(22)),
-                                    title: widget.countries
-                                            .isNotEmpty
-                                        ? Text(widget.countries[index]
-                                            .name)
+                                            BorderRadius.circular(10)),
+                                    title: widget.countries.isNotEmpty
+                                        ? Text(widget.countries[index].name)
                                         : null,
                                   ),
                                 ),
@@ -145,17 +146,24 @@ class _CountriesSelectionState extends State<CountriesSelection> {
                           ),
                         ),
                         ElevatedButton(
+                            style: ElevatedButton.styleFrom(
+                              primary: const Color(0xff064A7B) // Background color
+                            ),
                             onPressed: () async {
-                               di.sl<CountriesCubit>().saveCountrySelectionToLocalDB(widget.countries[currentIndex])
-                                   .then((value){
-                               if (value) {
-                                 di.sl<AppPreferences>().setShowCountries();
-                                 Navigator.pushNamedAndRemoveUntil(context, AppRouteName.home, (route) => false);
-                               }else{
-                                AppToasts.errorDialog(context: context);
-                               }
-
-                            });
+                              print('current country ==============================444444===================================== > ${widget.countries[currentIndex].name}');
+                              di
+                                  .sl<CountriesCubit>()
+                                  .saveCountrySelectionToLocalDB(
+                                      widget.countries[currentIndex])
+                                  .then((value) {
+                                if (value) {
+                                  di.sl<AppPreferences>().setShowCountries();
+                                  Navigator.pushNamedAndRemoveUntil(context,
+                                      AppRouteName.home, (route) => false);
+                                } else {
+                                  AppToasts.errorDialog(context: context);
+                                }
+                              });
                             },
                             child: const Icon(Icons.arrow_forward_sharp))
                       ],

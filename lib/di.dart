@@ -14,6 +14,7 @@ import 'package:bein_ecommerce/features/home/products/data/repositories/products
 import 'package:bein_ecommerce/features/home/products/domain/repositories/products_repo.dart';
 import 'package:bein_ecommerce/features/home/products/domain/use_cases/get_all_products.dart';
 import 'package:bein_ecommerce/features/home/products/presentation/manager/product_cubit.dart';
+import 'package:bein_ecommerce/features/home/slider/presentation/manager/offers_cubit.dart';
 import 'package:bein_ecommerce/features/on_boarding/data/data_sources/countries_cache_data_source.dart';
 import 'package:bein_ecommerce/features/on_boarding/data/data_sources/getCountries.dart';
 import 'package:bein_ecommerce/features/on_boarding/data/repositories/country_repo_impl.dart';
@@ -86,6 +87,9 @@ Future<void> init() async {
   sl.registerFactory<ProfileCubit>(() => ProfileCubit(
         profileUseCase: sl<ProfileUseCase>(),
       ));
+  sl.registerFactory<OffersCubit>(() => OffersCubit(
+    getAllProductsUseCase: sl<GetAllProductsUseCase>(),
+  ));
   //use-cases
   sl.registerLazySingleton<GetCurrentCountryUseCase>(
       () => GetCurrentCountryUseCase(countriesRepo: sl()));

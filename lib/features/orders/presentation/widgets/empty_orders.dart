@@ -23,32 +23,35 @@ class EmptyMyOrders extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(10.0),
             child: Image.asset(
-              ImagesManager.emptyCart,
-              width: 150.h,
-              height: 150.h,
+              AppLocalizations.of(context)!.isEnLocale ?  ImagesManager.emptyCartEn : ImagesManager.emptyCartAr ,
+              width: 300.h,
+              height: 500.h,
             ),
           ),
-          Text(
-            AppLocalizations.of(context)
-                ?.translate("empty_orders") ??
-                "empty_orders",
-            style: const TextStyle(
-                fontSize: 22, fontWeight: FontWeight.bold),
-          ),
+          // Text(
+          //   AppLocalizations.of(context)
+          //       ?.translate("empty_orders") ??
+          //       "empty_orders",
+          //   style: const TextStyle(
+          //       fontSize: 22, fontWeight: FontWeight.bold),
+          // ),
           const SizedBox(
-            height: 20,
+            height: 5,
           ),
-          SolidBtn(
-            onPressed: () {
-              Navigator.pushNamedAndRemoveUntil(
-                  context, AppRouteName.home, (route) => false);
-            },
-            Text: Text(
-              AppLocalizations.of(context)
-                  ?.translate('show_shops') ??
-                  "show_shops",
-              style: const TextStyle(
-                  fontSize: 18, color: ColorsManager.white),
+          Padding(
+            padding: const EdgeInsets.only(right:20.0 , left: 20),
+            child: SolidBtn(
+              onPressed: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, AppRouteName.home, (route) => false);
+              },
+              Text: Text(
+                AppLocalizations.of(context)
+                    ?.translate('show_shops') ??
+                    "show_shops",
+                style: const TextStyle(
+                    fontSize: 18, color: ColorsManager.white),
+              ),
             ),
           ),
         ],

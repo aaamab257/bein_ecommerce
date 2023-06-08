@@ -39,7 +39,6 @@ class _SplashScreen1State extends State<SplashScreen1> {
 
   @override
   Widget build(BuildContext context) {
-    bool isFirstTime = false;
 
     return BlocProvider(
       create: (context) => di.sl<CountriesCubit>()..getCurrentCountry(),
@@ -53,14 +52,14 @@ class _SplashScreen1State extends State<SplashScreen1> {
                 navigator: country == null
                     ? OnBoardingScreen(
                         pages: [
-                          OnBoardingModel(
+                          OnBoardingModels(
                             title: 'Justo lacus detraxit posuere lobortis.re',
                             description:
                                 'consul mel offendit doctus graeci per veniam tincidunt referrentur natum recteque sit graeco nonumy ornatus definitiones varius fermentum vel vix sea augue ei cu ornatus quaeque suscipit necessitatibus tempus tellus ridiculus ludus congue tamquam mucius mediocrem latine dolorum consectetuer delicata taciti inciderint omittam litora adhuc mea mauris convenire aliquet viverra ludus malorum cetero nominavi tincidunt senectus ultricies error tacimates simul movet sanctus no putent signiferumque malorum verear litora adversarium delicata conubia quis suavitate neque his quaeque civibus senectus error atomorum dico dicat honestatis platonem aptent eirmod porta nascetur eget curabitur doctus ancillae proin fringilla malesuada tempus vulputate ubique efficiantur quidam repudiare graeci voluptaria dico habitant pericula mutat libero definitiones ponderum ubique his conclusionemque solum fastidii eros mentitum pri legere pri eloquentiam oporteat affert sententiae cum tellus fastidii orci nihil placerat deseruisse quot tortor an adipisci idque conclusionemque inceptos lacus nihil pharetra duo malorum consectetuer utinam singulis porta audire sociis convallis dissentiunt aptent petentium dis accumsan fugit dolor donec dictas maluisset amet est splendide reprehendunt consetetur consectetuer assueverit tritani id animal moderatius movet lorem congue inani nostrum imperdiet feugiat his mazim invidunt voluptaria a accusata voluptaria intellegebat verear varius tantas aeque persius ius mutat feugiat animal ad meliore solet duis ultricies consetetur agam varius vituperatoribus iaculis id ludus dolorum adversarium suspendisse maiorum option movet in malesuada pulvinar movet sonet curae dictas interesset lobortis donec necessitatibus a nibh epicurei unum graeco tibique evertitur minim ferri mauris massa ante pri solum legimus porta movet gubergren salutatus turpis cetero viverra aliquet suspendisse nonumes morbi melius penatibus signiferumque suscipiantur fastidii equidem mei senectus fuisset appareat mattis malesuada option at fastidii equidem molestiae vitae recteque causae venenatis massa justo vero nec simul graece fusce his ut dis dicam mentitum velit fabulas doctus deterruisset harum vivamus ac mel sit quod conclusionemque quaestio tempus vim constituto placerat sagittis elaboraret est convallis epicuri etiam dicam quam conceptam viverra alterum omittantur et error nibh appareat meliore ubique congue propriae noster placerat reformidans eros sapientem quot aliquip epicuri numquam splendide donec risus arcu eripuit sagittis feugiat persecuti nominavi veri iudicabit alterum rhoncus aptent aperiri reque homero ex fabulas vidisse eum proin sadipscing ullamcorper consequat feugait aliquam expetenda scelerisque contentiones dicit quo sea sit wisi blandit imperdiet potenti mandamus nostra interpretaris tristique sed vituperatoribus aenean constituam congue expetendis tation explicari tortor aliquam consul moderatius agam reprehendunt agam eros saepe percipit atomorum fugit instructior vix quaerendum decore finibus tempus mea mnesarchum varius atomorum',
                             image: 'assets/image0.png',
                             bgColor: Colors.indigo,
                           ),
-                          OnBoardingModel(
+                          OnBoardingModels(
                             title:
                                 'dolorem sit decore animal his nam alia alia velit unum',
                             description:
@@ -68,7 +67,7 @@ class _SplashScreen1State extends State<SplashScreen1> {
                             image: 'assets/image1.png',
                             bgColor: const Color(0xff1eb090),
                           ),
-                          OnBoardingModel(
+                          OnBoardingModels(
                             title:
                                 'iaculis blandit gloriatur corrumpit legimus lorem dignissim tortor urna maiorum',
                             description:
@@ -76,7 +75,7 @@ class _SplashScreen1State extends State<SplashScreen1> {
                             image: 'assets/image2.png',
                             bgColor: const Color(0xfffeae4f),
                           ),
-                          OnBoardingModel(
+                          OnBoardingModels(
                             title:
                                 'propriae sociosqu per utroque inceptos netus tincidunt verterem usu purus',
                             description:

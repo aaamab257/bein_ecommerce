@@ -1,20 +1,16 @@
-import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import 'package:bein_ecommerce/core/utils/colors/colors_manager.dart';
 import 'package:bein_ecommerce/features/home/main-pages/home_screen.dart';
 import 'package:bein_ecommerce/features/settings/presentation/pages/settings_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:stomp_dart_client/stomp.dart';
-import 'package:stomp_dart_client/stomp_config.dart';
+import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
 import '../../../config/localization/app_localization.dart';
 import '../../cart/presentation/pages/cart_page.dart';
 import '../../user/profile/presentation/pages/profile_page.dart';
 import '../products/data/data_sources/remote_data_source/all_products_remote_data_source.dart';
 import 'package:bein_ecommerce/di.dart' as di;
-
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -24,11 +20,6 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-
-
-
-
-
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -41,24 +32,22 @@ class _MainScreenState extends State<MainScreen> {
     super.initState();
   }
 
-
-
-
-
   void onConnectCallback(StompFrame connectFrame) {
     // client is connected and ready
   }
 
+  static const TextStyle optionStyle =
+      TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   int _selectedIndex = 0;
   final iconList = <IconData>[
-    Icons.home,
+    Icons.shopping_bag_outlined,
     Icons.shopping_cart_checkout_outlined,
     Icons.person_outline,
     Icons.settings_outlined,
   ];
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    CartPage(),
+    CartPage(index: 0,),
     ProfilePage(),
     SettingsPage(),
   ];
@@ -76,87 +65,47 @@ class _MainScreenState extends State<MainScreen> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        backgroundColor: Colors.white10,
-        fixedColor: ColorsManager.black,
-        elevation: 5,
-        items: [
-          BottomNavigationBarItem(
-            icon: const Icon(
-              Icons.home,
-              color: ColorsManager.black,
-            ),
-            label: AppLocalizations.of(context)?.translate("home") ?? "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.shopping_cart_checkout_outlined,
-                color: ColorsManager.black),
-            label: AppLocalizations.of(context)?.translate("cart") ?? "Cart",
-          ),
-          BottomNavigationBarItem(
-            icon: const Icon(Icons.person_outline, color: ColorsManager.black),
-            label:
-                AppLocalizations.of(context)?.translate("account") ?? "Account",
-          ),
-          BottomNavigationBarItem(
-            icon:
-                const Icon(Icons.settings_outlined, color: ColorsManager.black),
-            label: AppLocalizations.of(context)?.translate("settings") ??
-                "Settings",
-          ),
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-      ),
+      bottomNavigationBar: GNav(
+          rippleColor: Colors.grey[300]!,
+          hoverColor: Colors.grey[100]!,
+          gap:8,
+          style: GnavStyle.google,
+          textStyle:const TextStyle(fontSize: 20 , color: Color(0xFF175b88) ) ,
+          activeColor:const Color(0xFF175b88),
+          iconSize: 20,
 
-      /* floatingActionButton: buildFloatingActionButton(),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked, */
-      /* bottomNavigationBar: AnimatedBottomNavigationBar.builder(
-      height: 60.h,
-      itemCount: iconList.length,
-      tabBuilder: (int index, bool isActive) {
-        const color =  Colors.white;
-        return Column(
-          
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const SizedBox(height: 10),
-            Icon(
-              iconList[index],
-              size: 24,
-              color: color,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
+          duration:const Duration(milliseconds: 500),
+          tabBackgroundColor: Colors.grey[100]!,
+          color: Colors.black,
+          tabs: [
+            GButton(
+              icon: Icons.shopping_bag_outlined,
+              iconColor: ColorsManager.black,
+              text: AppLocalizations.of(context)?.translate("home") ?? "Home",
             ),
-            const SizedBox(height: 4),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8),
-              child: Text(
-                index == 0
-                    ? AppLocalizations.of(context)?.translate("home") ??"Home"
-                    : index == 1
-                    ? AppLocalizations.of(context)?.translate("cart") ?? "Cart"
-                    : index == 2
-                    ? AppLocalizations.of(context)?.translate("account") ??"Account"
-                    :AppLocalizations.of(context)?.translate("settings") ?? "Settings",
-                maxLines: 1,
-                style: TextStyle(color: color , fontSize: 15.sp),
-              ),
-            )
+            GButton(
+              icon: Icons.shopping_cart_checkout_outlined,
+              iconColor: ColorsManager.black,
+              text: AppLocalizations.of(context)?.translate("cart") ?? "Cart",
+            ),
+            GButton(
+              icon: Icons.person_outline,
+              iconColor: ColorsManager.black,
+              text: AppLocalizations.of(context)?.translate("account") ??
+                  "Account",
+            ),
+            GButton(
+              icon: Icons.settings_outlined,
+              iconColor: ColorsManager.black,
+              text: AppLocalizations.of(context)?.translate("settings") ??
+                  "Settings",
+            ),
           ],
-        );
-      },
-      backgroundColor: ColorsManager.black,
-      activeIndex: _selectedIndex,
-      splashColor: ColorsManager.orange,
-      splashSpeedInMilliseconds: 300,
-      notchSmoothness: NotchSmoothness.softEdge,
-      gapLocation: GapLocation.center,
-      leftCornerRadius: 32,
-      rightCornerRadius: 32,
-      
-      onTap: (index) {
-        _onItemTapped(index);
-      },
-    ), */
+          selectedIndex: _selectedIndex,
+          onTabChange: _onItemTapped),
+
     );
   }
 

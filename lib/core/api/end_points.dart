@@ -34,4 +34,9 @@ class EndPoints {
   static const String socketURL = 'http://192.168.100.50:8082/ws' ;
 
 
+
+  // offers
+  static const String getOffers = '${BASE_URL}adds';
+  static const String getOnBoarding = '${BASE_URL}onboarding';
+
 }

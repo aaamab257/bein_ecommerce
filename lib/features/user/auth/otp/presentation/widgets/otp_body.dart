@@ -63,6 +63,8 @@ class _OtpBodyState extends State<OtpBody> {
                               child: Container(
                                 width: MediaQuery.of(context).size.width,
                                 child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Align(
                                       alignment: Alignment.centerLeft,

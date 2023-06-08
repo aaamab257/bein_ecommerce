@@ -6,6 +6,8 @@ import 'package:bein_ecommerce/features/home/products/domain/repositories/produc
 import 'package:dartz/dartz.dart';
 
 import '../../../../../core/network_checker/network_checker.dart';
+import '../../../../on_boarding/data/models/onboarding.dart';
+import '../models/slider_model.dart';
 
 class ProductsRepoImpl implements ProductsRepo {
 
@@ -33,5 +35,21 @@ class ProductsRepoImpl implements ProductsRepo {
     return Right(products);
   }
 
+  @override
+  Future<Either<Failure, OffersModel>> getOffers() async {
+    OffersModel? offersModel ;
+    if (await networkInfo.isConnected) {
+      (await allProductsRemoteDataSource.getOffers()).fold((failure) {
+        return Left(ServerFailure());
+      }, (offers) {
+
+        offersModel = offers;
+
+      });
+    } else {
+      return Left(NetworkFailure());
+    }
+    return Right(offersModel!);
+  }
   
 }

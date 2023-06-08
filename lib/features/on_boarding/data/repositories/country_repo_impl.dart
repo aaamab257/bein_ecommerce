@@ -3,6 +3,7 @@ import 'package:bein_ecommerce/core/network_checker/network_checker.dart';
 import 'package:bein_ecommerce/features/on_boarding/data/data_sources/getCountries.dart';
 import 'package:bein_ecommerce/features/on_boarding/data/mapper.dart';
 import 'package:bein_ecommerce/features/on_boarding/data/models/country.dart';
+import 'package:bein_ecommerce/features/on_boarding/data/models/onboarding.dart';
 import 'package:bein_ecommerce/features/on_boarding/domain/entities/countries_entity.dart';
 import 'package:bein_ecommerce/features/on_boarding/domain/repositories/countries_repo.dart';
 import 'package:dartz/dartz.dart';
@@ -55,5 +56,20 @@ class CountryRepoImpl implements CountriesRepo {
     } catch (_) {
       return Left(CacheFailure());
     }
+  }
+
+  @override
+  Future<Either<Failure, OnBoardingModel>> getOnBoarding() async {
+    OnBoardingModel? onBoardingModel ;
+    if (await networkInfo.isConnected) {
+      (await countriesRemoteDataSource.getOnBoarding()).fold((failure) {
+        return Left(ServerFailure());
+      }, (onBoarding) {
+        onBoardingModel = onBoarding;
+      });
+    } else {
+      return Left(NetworkFailure());
+    }
+    return Right(onBoardingModel!);
   }
 }

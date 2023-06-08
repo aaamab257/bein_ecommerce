@@ -20,7 +20,7 @@ class _SolidBtnState extends State<SolidBtn> {
     return OutlinedButton(
       
       style: OutlinedButton.styleFrom(
-        backgroundColor:ColorsManager.black,
+        backgroundColor:Color(0xff064A7B),
         
       ),
       onPressed: widget.onPressed,

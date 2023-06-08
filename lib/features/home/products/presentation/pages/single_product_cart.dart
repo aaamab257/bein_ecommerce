@@ -1,31 +1,27 @@
-import 'package:bein_ecommerce/config/route/app_routes.dart';
-import 'package:bein_ecommerce/core/utils/colors/colors_manager.dart';
-import 'package:bein_ecommerce/features/cart/presentation/widgets/cart_with_products.dart';
-import 'package:bein_ecommerce/features/user/auth/login/presentation/manager/login_cubit.dart';
-
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:bein_ecommerce/di.dart' as di;
-import '../../../../config/localization/app_localization.dart';
-import '../../../../core/shared_widgets/error_widgts.dart';
-import '../../../../core/shared_widgets/loading_screen.dart';
-import '../../../on_boarding/presentation/manager/countries_cubit.dart';
-import '../../data/local/models/cart_model.dart';
-import '../manager/cart_cubit.dart';
-import '../manager/cart_state.dart';
-import '../widgets/empty_cart.dart';
+import '../../../../../config/localization/app_localization.dart';
+import '../../../../../config/route/app_routes.dart';
+import '../../../../../core/shared_widgets/error_widgts.dart';
+import '../../../../../core/shared_widgets/loading_screen.dart';
+import '../../../../../core/utils/colors/colors_manager.dart';
+import '../../../../cart/data/local/models/cart_model.dart';
+import '../../../../cart/presentation/manager/cart_cubit.dart';
+import '../../../../cart/presentation/manager/cart_state.dart';
+import '../../../../cart/presentation/widgets/empty_cart.dart';
+import '../../../../on_boarding/presentation/manager/countries_cubit.dart';
+import '../../../../user/auth/login/presentation/manager/login_cubit.dart';
 
-class CartPage extends StatefulWidget {
-  final int index;
-
-  const CartPage({super.key, required this.index});
+class SingleProductCart extends StatefulWidget {
+  const SingleProductCart({Key? key}) : super(key: key);
 
   @override
-  State<CartPage> createState() => _CartPageState();
+  State<SingleProductCart> createState() => _SingleProductCartState();
 }
 
-class _CartPageState extends State<CartPage> {
+class _SingleProductCartState extends State<SingleProductCart> {
   bool isEmpty = false;
   List<CartModel> cart = [];
   String cartId = "";
@@ -76,11 +72,9 @@ class _CartPageState extends State<CartPage> {
                 } else {
                   return SafeArea(
                     child: Scaffold(
-                      appBar: widget.index == 1
-                          ? AppBar(
-                              backgroundColor: ColorsManager.background,
-                            )
-                          : null,
+                      appBar: AppBar(
+                        backgroundColor: ColorsManager.background,
+                      ),
                       backgroundColor: ColorsManager.background,
                       body: Container(
                         width: MediaQuery.of(context).size.width,
@@ -153,7 +147,7 @@ class _CartPageState extends State<CartPage> {
                                                           .product!
                                                           .images![0]
                                                           .url!,
-                                                      width: 60,
+                                                      width: 50,
                                                     ),
                                                   ),
                                                   Expanded(
@@ -163,7 +157,7 @@ class _CartPageState extends State<CartPage> {
                                                       Container(
                                                         padding:
                                                             const EdgeInsets
-                                                                .only(left: 14),
+                                                                .all(5),
                                                         child: Text(
                                                           cart[index]
                                                                   .product!
@@ -172,8 +166,8 @@ class _CartPageState extends State<CartPage> {
                                                               "",
                                                           textAlign:
                                                               TextAlign.start,
-                                                          overflow:
-                                                              TextOverflow.ellipsis,
+                                                          overflow: TextOverflow
+                                                              .ellipsis,
                                                           maxLines: 2,
                                                           style: const TextStyle(
                                                               fontSize: 13,
@@ -184,71 +178,44 @@ class _CartPageState extends State<CartPage> {
                                                                       .normal),
                                                         ),
                                                       ),
-                                                      Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .center,
-                                                        children: [
-                                                          IconButton(
-                                                              icon: const Icon(
-                                                                  Icons.add , size: 20,),
-                                                              onPressed: () {
-                                                                setState(() {
-                                                                  cart[index]
-                                                                          .quantity =
-                                                                      cart[index]
-                                                                              .quantity! +
-                                                                          1;
-                                                                });
-                                                                di
-                                                                    .sl<
-                                                                        CartCubit>()
-                                                                    .increaseProduct(
-                                                                        cart[
-                                                                            index],
-                                                                        1)
-                                                                    .then(
-                                                                        (value) {
+                                                      Padding(
+                                                        padding:
+                                                            const EdgeInsets
+                                                                .all(5),
+                                                        child: Text(
+                                                          '${cart[index].product!.price!}',
+                                                          textAlign:
+                                                              TextAlign.start,
+                                                          overflow:
+                                                              TextOverflow.clip,
+                                                          style:
+                                                              const TextStyle(
+                                                                  fontSize: 14),
+                                                        ),
+                                                      ),
+                                                      Container(
+                                                        child: Row(
+                                                          mainAxisAlignment:
+                                                              MainAxisAlignment
+                                                                  .start,
+                                                          children: [
+                                                            IconButton(
+                                                                icon:
+                                                                    const Icon(
+                                                                  Icons.add,
+                                                                  size: 20,
+                                                                ),
+                                                                onPressed: () {
                                                                   setState(() {
-                                                                    CartCubit.get(
-                                                                            context)
-                                                                        .amount += cart[
-                                                                            index]
-                                                                        .product!
-                                                                        .price!;
-                                                                  });
-                                                                });
-                                                              }),
-                                                          Padding(
-                                                            padding:
-                                                                const EdgeInsets
-                                                                    .all(8.0),
-                                                            child: Text(
-                                                                '${cart[index].quantity!}'),
-                                                          ),
-                                                          IconButton(
-                                                              icon: const Icon(
-                                                                  Icons.remove, size: 20,),
-                                                              onPressed: () {
-                                                                setState(() {
-                                                                  if (cart[index]
-                                                                          .quantity! >=
-                                                                      1) {
                                                                     cart[index]
                                                                             .quantity =
-                                                                        cart[index].quantity! -
+                                                                        cart[index].quantity! +
                                                                             1;
-                                                                    CartCubit.get(
-                                                                            context)
-                                                                        .amount -= cart[
-                                                                            index]
-                                                                        .product!
-                                                                        .price!;
-                                                                  }
+                                                                  });
                                                                   di
                                                                       .sl<
                                                                           CartCubit>()
-                                                                      .decreaseProduct(
+                                                                      .increaseProduct(
                                                                           cart[
                                                                               index],
                                                                           1)
@@ -256,39 +223,72 @@ class _CartPageState extends State<CartPage> {
                                                                           (value) {
                                                                     setState(
                                                                         () {
-                                                                      if (cart[index]
-                                                                              .quantity! ==
-                                                                          0) {
-                                                                        CartCubit.get(context)
-                                                                            .amount -= cart[
-                                                                                index]
-                                                                            .product!
-                                                                            .price!;
-                                                                        cart.remove(
-                                                                            cart[index]);
-                                                                      }
+                                                                      CartCubit.get(
+                                                                              context)
+                                                                          .amount += cart[
+                                                                              index]
+                                                                          .product!
+                                                                          .price!;
                                                                     });
                                                                   });
-                                                                });
-                                                              }),
-                                                        ],
+                                                                }),
+                                                            Padding(
+                                                              padding:
+                                                                  const EdgeInsets
+                                                                      .all(5.0),
+                                                              child: Text(
+                                                                  '${cart[index].quantity!}'),
+                                                            ),
+                                                            IconButton(
+                                                                icon:
+                                                                    const Icon(
+                                                                  Icons.remove,
+                                                                  size: 20,
+                                                                ),
+                                                                onPressed: () {
+                                                                  setState(() {
+                                                                    if (cart[index]
+                                                                            .quantity! >=
+                                                                        1) {
+                                                                      cart[index]
+                                                                              .quantity =
+                                                                          cart[index].quantity! -
+                                                                              1;
+                                                                      CartCubit.get(
+                                                                              context)
+                                                                          .amount -= cart[
+                                                                              index]
+                                                                          .product!
+                                                                          .price!;
+                                                                    }
+                                                                    di
+                                                                        .sl<
+                                                                            CartCubit>()
+                                                                        .decreaseProduct(
+                                                                            cart[
+                                                                                index],
+                                                                            1)
+                                                                        .then(
+                                                                            (value) {
+                                                                      setState(
+                                                                          () {
+                                                                        if (cart[index].quantity! ==
+                                                                            0) {
+                                                                          CartCubit.get(context).amount -= cart[index]
+                                                                              .product!
+                                                                              .price!;
+                                                                          cart.remove(
+                                                                              cart[index]);
+                                                                        }
+                                                                      });
+                                                                    });
+                                                                  });
+                                                                }),
+                                                          ],
+                                                        ),
                                                       )
                                                     ],
                                                   )),
-                                                  Padding(
-                                                    padding:
-                                                        const EdgeInsets.all(
-                                                            14),
-                                                    child: Text(
-                                                      '${cart[index].product!.price!}',
-                                                      textAlign:
-                                                          TextAlign.start,
-                                                      overflow:
-                                                          TextOverflow.clip,
-                                                      style: const TextStyle(
-                                                          fontSize: 14),
-                                                    ),
-                                                  ),
                                                 ],
                                               ),
                                             );
@@ -393,4 +393,3 @@ class _CartPageState extends State<CartPage> {
             }));
   }
 }
-

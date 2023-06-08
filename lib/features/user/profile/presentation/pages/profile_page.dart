@@ -18,7 +18,6 @@ import '../widgets/gest_profile.dart';
 import '../widgets/logged_profile.dart';
 import 'package:intl/intl.dart';
 
-
 class ProfilePage extends StatefulWidget {
   const ProfilePage({Key? key}) : super(key: key);
 
@@ -46,12 +45,7 @@ class _ProfilePageState extends State<ProfilePage> {
         });
       }
     });
-
   }
-
-
-
-
 
   @override
   void dispose() {
@@ -78,6 +72,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 } else {
                   return SafeArea(
                     child: Scaffold(
+                        appBar: AppBar(
+                            backgroundColor: ColorsManager.background,
+                            automaticallyImplyLeading: false),
                         backgroundColor: ColorsManager.background,
                         body: _isLogged
                             ? const LoggedProfile()

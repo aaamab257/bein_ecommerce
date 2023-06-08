@@ -27,33 +27,9 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   var cubit = di.sl<ProductCubit>();
   List<ProductModel> products = [];
-  int _selectedIndex = 0;
-  late AnimationController _drawerSlideController;
   final int index = 0;
 
-  /* static const List<Widget> _widgetOptions = <Widget>[  
-    HomeContent(),
 
-  ];  */
-  /* bool _isDrawerOpen() {
-  return _drawerSlideController.value == 1.0;
-  }
-
-  bool _isDrawerOpening() {
-  return _drawerSlideController.status == AnimationStatus.forward;
-  }
-
-  bool _isDrawerClosed() {
-  return _drawerSlideController.value == 0.0;
-  }
-
-  void _toggleDrawer() {
-  if (_isDrawerOpen() || _isDrawerOpening()) {
-  _drawerSlideController.reverse();
-  } else {
-  _drawerSlideController.forward();
-  }
-  } */
 
   @override
   void initState() {
@@ -118,7 +94,7 @@ class _HomeScreenState extends State<HomeScreen>
         child: Container(
           margin: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
+              borderRadius: BorderRadius.circular(5),
               border: Border.all(color: ColorsManager.grey),
               color: ColorsManager.white),
           padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),

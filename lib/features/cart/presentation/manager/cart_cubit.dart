@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:bein_ecommerce/features/cart/data/local/models/place_order_model.dart';
 import 'package:bein_ecommerce/features/home/products/data/models/product_model.dart';
 import 'package:bein_ecommerce/features/on_boarding/presentation/manager/countries_cubit.dart';
@@ -29,10 +31,16 @@ class CartCubit extends Cubit<CartState> {
   List<String> _payType = [];
 
   int? quantity;
+  bool isFoundeds = false;
+  int? cartLen ;
+
+  bool get isProductFounded => isFoundeds;
 
   List<CartModel> get cartModel => _cartModel;
 
   List<String> get payType => _payType;
+
+  int? get length => cartLen; 
 
   String get getCurrency => currency;
 
@@ -50,6 +58,36 @@ class CartCubit extends Cubit<CartState> {
       emit(CartSuccess());
     });
     return cart_id;
+  }
+
+  Future<CartModel> getCartModel(String productId) async {
+    CartModel? cartModel;
+    List<CartModel> cartL = await getCart() ;
+
+
+    for(var item in cartL){
+      if(productId == item.product!.id){
+        cartModel = item ;
+        return item ;
+      }
+    }
+    return cartModel!;
+  }
+
+  Future<bool> isFounded(String productId) async {
+    List<CartModel> cartIsFounded = await getCart();
+    bool foundeds = true;
+    bool notFound = false;
+    for (var product in cartIsFounded) {
+      if (productId == product.product!.id) {
+        print('cart Len Single Product ========================= true');
+        return foundeds;
+      } else {
+        return notFound;
+      }
+    }
+
+    return isFoundeds;
   }
 
   Future<bool> addProductToCart(
@@ -124,6 +162,7 @@ class CartCubit extends Cubit<CartState> {
       emit(CartError());
     }, (products) {
       _cartModel = products;
+      cartLen = _cartModel.length;
       _cartModel.forEach((element) {
         amount += element.product!.price! * element.quantity!;
       });

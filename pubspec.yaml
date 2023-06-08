@@ -47,6 +47,10 @@ dependencies:
   rxdart: ^0.27.5
   timezone: any
   flutter_native_timezone: ^2.0.0
+  google_nav_bar: ^5.0.6
+  line_icons: ^2.0.1
+  devicelocale: ^0.6.0
+  intl_phone_field: ^3.1.0
 
 
 

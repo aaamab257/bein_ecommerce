@@ -6,25 +6,29 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/usecase/usecase.dart';
+import '../../../../on_boarding/data/models/onboarding.dart';
 import '../../../../on_boarding/domain/entities/countries_entity.dart';
+import '../../data/models/slider_model.dart';
 
-class ProductCubit extends Cubit<ProductsState>{
- final GetAllProductsUseCase getAllProductsUseCase;
-  
+class ProductCubit extends Cubit<ProductsState> {
+  final GetAllProductsUseCase getAllProductsUseCase;
 
   ProductCubit({
     required this.getAllProductsUseCase,
-    
-  }): super(ProductsInitial());
+  }) : super(ProductsInitial());
 
   static ProductCubit get(context) => BlocProvider.of(context);
 
   List<ProductModel> products = [];
 
+  OffersModel get getOffer => offersModel;
+
+  OffersModel offersModel = OffersModel();
+
   Future<List<ProductModel>> getProducts() async {
     emit(ProductsLoading());
     (await getAllProductsUseCase.call(NoParams())).fold((failure) {
-      debugPrint("uuuuuuuuuuu" +failure.toString());
+      debugPrint("uuuuuuuuuuu" + failure.toString());
       emit(ProductsError());
     }, (products) {
       debugPrint(products.toString());
@@ -33,5 +37,6 @@ class ProductCubit extends Cubit<ProductsState>{
     });
     return products;
   }
+
 
 }

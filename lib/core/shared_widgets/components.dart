@@ -18,9 +18,7 @@ class PriceWidget extends StatelessWidget {
     return Text(
       textAlign: TextAlign.center,
       "$price ${AppLocalizations.of(context)!.translate(AppStringsKey.currency) ?? ""}",
-      style: Theme.of(context).textTheme.titleMedium!.copyWith(
-        color: customColor,
-      ),
+      style: const TextStyle(color: ColorsManager.black , fontSize: 14 , fontWeight: FontWeight.bold ),
     );
   }
 }

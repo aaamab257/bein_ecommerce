@@ -6,11 +6,11 @@ import 'package:bein_ecommerce/features/user/auth/login/data/models/register_req
 import 'package:bein_ecommerce/features/user/auth/login/presentation/manager/login_cubit.dart';
 import 'package:bein_ecommerce/features/user/auth/login/presentation/manager/login_state.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:bein_ecommerce/di.dart' as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
-
+import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../../../../../config/localization/app_localization.dart';
+import '../../../../../../core/shared_widgets/custom_snackbar.dart';
 import '../../../../../../core/shared_widgets/error_widgts.dart';
 import '../../../../../../core/shared_widgets/loading_screen.dart';
 import '../../../../../../core/shared_widgets/solid_button.dart';
@@ -18,7 +18,9 @@ import '../../../../../../core/utils/colors/colors_manager.dart';
 import '../../../otp/presentation/pages/otp_page.dart';
 
 class LoginBody extends StatefulWidget {
-  const LoginBody({super.key});
+  String iniCountry = '';
+  List<String> countries = [];
+  LoginBody({super.key, required this.countries, required this.iniCountry});
 
   @override
   State<LoginBody> createState() => _LoginBodyState();
@@ -44,7 +46,7 @@ class _LoginBodyState extends State<LoginBody> {
   @override
   void initState() {
     super.initState();
-    _isEnabled = false;
+    _isEnabled = true;
   }
 
   @override
@@ -113,24 +115,22 @@ class _LoginBodyState extends State<LoginBody> {
                                       const SizedBox(
                                         height: 20,
                                       ),
-                                      TextField(
-                                        onChanged: (value) {
-                                          print("changed");
-                                          if (_phoneController.text.length ==
-                                              11) {
-                                            setState(() {
-                                              _isEnabled = true;
-                                            });
-                                          } else {
-                                            setState(() {
-                                              _isEnabled = false;
-                                            });
-                                          }
+                                      IntlPhoneField(
+                                        showCountryFlag: false,
+                                        showCursor: false,
+                                        onChanged: (value) {},
+                                        onSubmitted: (valueKey) {
+                                          print(
+                                              'phone number ==========1============== >${valueKey}');
                                         },
+                                        countries: widget.countries,
+                                        initialCountryCode: widget.iniCountry,
                                         controller: _phoneController,
+                                        textAlign: TextAlign.start,
                                         focusNode: _phoneFocus,
                                         keyboardType: TextInputType.number,
                                         decoration: InputDecoration(
+                                          border: const OutlineInputBorder(),
                                           hintText: AppLocalizations.of(context)
                                                   ?.translate("phone") ??
                                               "Phone number",
@@ -139,13 +139,13 @@ class _LoginBodyState extends State<LoginBody> {
                                               color: Colors.grey[800]),
                                           fillColor: ColorsManager.background,
                                           alignLabelWithHint: true,
-                                          isDense: true,
+                                          isDense: false,
                                         ),
                                       ),
                                       isEmptyPhone
-                                          ? Align(
+                                          ? const Align(
                                               alignment: Alignment.centerLeft,
-                                              child: const Text(
+                                              child: Text(
                                                 'Please Enter your phone',
                                                 style: TextStyle(
                                                     color: ColorsManager.red,
@@ -163,6 +163,8 @@ class _LoginBodyState extends State<LoginBody> {
                                               keyboardType:
                                                   TextInputType.emailAddress,
                                               decoration: InputDecoration(
+                                                border:
+                                                    const OutlineInputBorder(),
                                                 hintText: AppLocalizations.of(
                                                             context)
                                                         ?.translate("email") ??
@@ -195,9 +197,9 @@ class _LoginBodyState extends State<LoginBody> {
                                         height: 10.0,
                                       ),
                                       emailFounded
-                                          ? Align(
+                                          ? const Align(
                                               alignment: Alignment.centerLeft,
-                                              child: const Text(
+                                              child: Text(
                                                 'This Email already taken by another user',
                                                 style: TextStyle(
                                                     color: ColorsManager.red,
@@ -225,8 +227,16 @@ class _LoginBodyState extends State<LoginBody> {
                                             if (email) {
                                               if (_emailController
                                                   .text.isEmpty) {
+                                                showSnackBar(
+                                                    context,
+                                                    AppLocalizations.of(
+                                                                context)!
+                                                            .translate(
+                                                                "empty_fields") ??
+                                                        "Please fill Empty Fields",
+                                                    );
                                                 setState(() {
-                                                  isEmptyEmail = true;
+                                                  isEmptyEmail = false;
                                                 });
                                               } else {
                                                 setState(() {
@@ -321,8 +331,25 @@ class _LoginBodyState extends State<LoginBody> {
                                             } else {
                                               if (_phoneController
                                                   .text.isEmpty) {
+                                                showSnackBar(
+                                                    context,
+                                                    AppLocalizations.of(
+                                                                context)!
+                                                            .translate(
+                                                                "empty_fields") ??
+                                                        "Please fill Empty Fields",
+                                                    );
                                                 setState(() {
-                                                  isEmptyPhone = true;
+                                                  isEmptyPhone = false;
+                                                  // showSnackBar(
+                                                  //     context,
+                                                  //     AppLocalizations.of(
+                                                  //                 context)!
+                                                  //             .translate(
+                                                  //                 "empty_fields") ??
+                                                  //         "Please fill Empty Fields",
+                                                  //     ColorsManager.white,
+                                                  //     const Color(0xff064A7B));
                                                 });
                                               } else {
                                                 setState(() {
@@ -336,6 +363,8 @@ class _LoginBodyState extends State<LoginBody> {
                                                                     .text))
                                                     .then((value) {
                                                   if (value) {
+                                                    print(
+                                                        'phone number ==========1============== >${_phoneController.text.trim()}');
                                                     Navigator.push(
                                                         context,
                                                         PageRouteBuilder(
@@ -380,6 +409,8 @@ class _LoginBodyState extends State<LoginBody> {
                                                             }));
                                                   } else {
                                                     setState(() {
+                                                      print(
+                                                          'phone number ==========2============== >${_phoneController.text.trim()}');
                                                       email = true;
                                                     });
                                                   }
@@ -389,7 +420,15 @@ class _LoginBodyState extends State<LoginBody> {
                                               /**/
                                             }
                                           }
-                                        : () {},
+                                        : () {
+                                            showSnackBar(
+                                                context,
+                                                AppLocalizations.of(context)!
+                                                        .translate(
+                                                            "empty_fields") ??
+                                                    "Please fill Empty Fields",
+                                                );
+                                          },
                                     Text: Text(
                                       AppLocalizations.of(context)
                                               ?.translate('continue') ??

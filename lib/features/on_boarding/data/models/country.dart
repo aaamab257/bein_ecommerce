@@ -8,6 +8,7 @@ class CountryModel {
   String? internationalCallingCode;
   String? status;
   String? createdDate;
+  String? code ;
 
   CountryModel(
       {this.id,
@@ -16,7 +17,9 @@ class CountryModel {
         this.currencyDecimalPoint,
         this.internationalCallingCode,
         this.status,
-        this.createdDate});
+        this.createdDate,
+        this.code
+        });
 
   CountryModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
@@ -26,6 +29,7 @@ class CountryModel {
     internationalCallingCode = json['internationalCallingCode'];
     status = json['status'];
     createdDate = json['createdDate'];
+    code = json['code'] ;
   }
 
   Map<String, dynamic> toJson() {
@@ -37,11 +41,12 @@ class CountryModel {
     data['internationalCallingCode'] = internationalCallingCode;
     data['status'] = status;
     data['createdDate'] = createdDate;
+    data['code'] = code ;
     return data;
   }
 
   CountryEntity toEntity(){
-    return CountryEntity(name: name ?? "EGYPT", id: id ?? "1" , currency: currency ?? "LE");
+    return CountryEntity(name: name ?? "EGYPT", id: id ?? "1" , currency: currency ?? "LE" ,internationalCallingCode: internationalCallingCode ?? "EG" , code: code ?? "EG");
 }
 
 

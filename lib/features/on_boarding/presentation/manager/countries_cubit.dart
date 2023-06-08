@@ -1,4 +1,5 @@
 import 'package:bein_ecommerce/core/shared_pref/app_prefs.dart';
+import 'package:bein_ecommerce/features/on_boarding/data/models/onboarding.dart';
 import 'package:bein_ecommerce/features/on_boarding/domain/entities/countries_entity.dart';
 import 'package:bein_ecommerce/features/on_boarding/domain/use_cases/get_current_country_usecase.dart';
 import 'package:equatable/equatable.dart';
@@ -23,10 +24,11 @@ class CountriesCubit extends Cubit<CountriesState> {
   static CountriesCubit get(context) => BlocProvider.of(context);
 
   String currency = "" ;
-
+  OnBoardingModel? onBoardingModel ;
   String get getCurrency => currency ;
 
   List<CountryEntity> countries = [];
+
 
   Future<List<CountryEntity>> getCountries() async {
     emit(CountriesLoading());
@@ -73,6 +75,19 @@ class CountriesCubit extends Cubit<CountriesState> {
   return countryEntity! ;
   }
 
+
+  Future<OnBoardingModel> getOnBoarding() async {
+    emit(CountriesLoading());
+    (await getAllCountriesUseCase.getAllOnBoarding(NoParams())).fold((failure) {
+      debugPrint("uuuuuuuuuuu" +failure.toString());
+      emit(CountriesError());
+    }, (onBoard) {
+
+      onBoardingModel = onBoard;
+      emit(CountriesSuccess());
+    });
+    return onBoardingModel!;
+  }
 
 
 }

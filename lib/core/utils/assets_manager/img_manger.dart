@@ -11,8 +11,8 @@ class ImagesManager {
   static const String bannerDemo2 = '$imgPath/banners/b2.jpg';
   static const String bannerDemo3 = '$imgPath/banners/b3.jpg';
   static const String bannerDemo4 = '$imgPath/banners/b4.jpg';
-  static const String emptyCart = '$imgPath/empty_cart.png';
+  static const String emptyCartEn = '$imgPath/cart_en.png';
+  static const String emptyCartAr = '$imgPath/cart_ar.png';
   
-
 
 }

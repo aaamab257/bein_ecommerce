@@ -7,8 +7,10 @@ class ColorsManager{
   static const Color red = Colors.red;
   static const Color splashBackground = Colors.white;
   static const Color starIconColor = Colors.amber;
-  static const black = Color(0xff2b2b2b);
+  static const black = Color.fromARGB(255, 43, 43, 43);
   static const background = Color.fromARGB(255, 255, 255, 253);
+  static const lightBlue = Color(0x8298D7FF);
+  //8298D7FF
   static const orange = MaterialColor(0xffe57f47, {
     50: Color(0xffe57f47),
     100: Color(0xffe57f47),

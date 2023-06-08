@@ -26,6 +26,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
       child: SafeArea(
         child: Scaffold(
           appBar: AppBar(
+            elevation: 1,
             title: Text(AppLocalizations.of(context)!.translate("checkout") ??
                 "Checkout"),
             centerTitle: true,

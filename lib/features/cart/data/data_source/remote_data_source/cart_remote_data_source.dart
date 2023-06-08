@@ -212,7 +212,8 @@ class CartRemoteDataSourceImpl implements CartRemoteDataSource {
             "email": request.email,
             "phoneNumber": request.phone,
             "address": request.address,
-            "nationalId": request.nationalId
+            "nationalId": request.nationalId,
+            "months":request.months
           },
           Options(
             headers: {

@@ -17,7 +17,7 @@ class CategoryHomeIcon extends StatelessWidget {
             flex: 1,
             child: Card(
               elevation: 3,
-              margin: const EdgeInsets.only(left: 15, right: 15),
+              margin: const EdgeInsets.only(left: 8, right: 8),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Align(

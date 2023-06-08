@@ -6,8 +6,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:bein_ecommerce/di.dart' as di;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:panara_dialogs/panara_dialogs.dart';
+import '../../../../../config/localization/app_localization.dart';
 import '../../../../../core/shared_widgets/error_widgts.dart';
 import '../../../../../core/shared_widgets/loading_screen.dart';
+import '../../data/local/models/profile_data_request.dart';
 import '../manager/profile_cubit.dart';
 
 class AccountInfoScreen extends StatefulWidget {
@@ -47,6 +50,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                     _firstNameController.text = userModel.firstName ?? "";
                     _lastNameController.text = userModel.lastName ?? "";
                     _phoneController.text = userModel.phone!.phoneNumber!;
+                    _addressController.text = userModel.address!;
                     refresh = true;
                   });
                 });
@@ -66,7 +70,12 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       appBar: AppBar(
                         backgroundColor: ColorsManager.splashBackground,
                         centerTitle: true,
-                        title: const Text('Profile'),
+                        title: Text(
+                          AppLocalizations.of(context)?.translate("account") ??
+                              "account",
+                          style: const TextStyle(
+                              fontSize: 18.0, fontWeight: FontWeight.bold),
+                        ),
                       ),
                       body: Container(
                         color: Colors.white,
@@ -74,11 +83,11 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                           children: <Widget>[
                             Column(
                               children: <Widget>[
-                                Container(
-                                  color: Color(0xffFFFFFF),
-                                  child: Padding(
-                                    padding:
-                                        const EdgeInsets.only(bottom: 25.0),
+                                Padding(
+                                  padding:
+                                  const EdgeInsets.symmetric(horizontal: 16.0 , vertical: 20),
+                                  child: Container(
+                                    color: Color(0xffFFFFFF),
                                     child: Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -86,282 +95,307 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                                           MainAxisAlignment.start,
                                       children: <Widget>[
                                         Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 25.0),
-                                            child: Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: <Widget>[
-                                                    Text(
-                                                      'Account Information',
-                                                      style: TextStyle(
-                                                          fontSize: 18.0,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ],
-                                                ),
-                                                Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.end,
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: <Widget>[
-                                                    _status
-                                                        ? _getEditIcon()
-                                                        : Container(),
-                                                  ],
-                                                )
-                                              ],
-                                            )),
-                                        Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 25.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Text(
-                                                      'First Name',
-                                                      style: TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            )),
-                                        Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 2.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Flexible(
-                                                  flex: 1,
-                                                  child: TextField(
-                                                    controller:
-                                                        _firstNameController,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                      hintText: "First Name",
-                                                    ),
-                                                    enabled: !_status,
-                                                    autofocus: !_status,
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment
+                                                    .spaceBetween,
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: <Widget>[
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                mainAxisSize:
+                                                    MainAxisSize.min,
+                                                children: <Widget>[
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                                context)
+                                                            ?.translate(
+                                                                "account_info") ??
+                                                        "account_info",
+                                                    style: const TextStyle(
+                                                        fontSize: 18.0,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
-                                                ),
-                                              ],
-                                            )),
+                                                ],
+                                              ),
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.end,
+                                                mainAxisSize:
+                                                    MainAxisSize.min,
+                                                children: <Widget>[
+                                                  _status
+                                                      ? _getEditIcon()
+                                                      : Container(),
+                                                ],
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                         Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 25.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Text(
-                                                      'Last Name',
-                                                      style: TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            )),
-                                        Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 2.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Flexible(
-                                                  flex: 1,
-                                                  child: TextField(
-                                                    controller:
-                                                        _lastNameController,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                      hintText: "Last Name",
-                                                    ),
-                                                    enabled: !_status,
-                                                    autofocus: !_status,
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: <Widget>[
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                mainAxisSize:
+                                                    MainAxisSize.min,
+                                                children: [
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                                context)!
+                                                            .translate(
+                                                                "firstName") ??
+                                                        "First name",
+                                                    style: const TextStyle(
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
-                                                ),
-                                              ],
-                                            )),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                         Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 25.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Text(
-                                                      'Email',
-                                                      style: TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            )),
-                                        Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 2.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Flexible(
-                                                  child: TextField(
-                                                    controller:
-                                                    _emailController,
-                                                    decoration:
-                                                    const InputDecoration(
-                                                        hintText:
-                                                        "Enter Email"),
-                                                    enabled: false,
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: <Widget>[
+                                              Flexible(
+                                                flex: 1,
+                                                child: TextField(
+                                                  controller:
+                                                      _firstNameController,
+                                                  decoration: InputDecoration(
+                                                    border: OutlineInputBorder(),
+                                                    hintText: AppLocalizations
+                                                                .of(context)!
+                                                            .translate(
+                                                                "firstName") ??
+                                                        "First name",
                                                   ),
+                                                  enabled: !_status,
+                                                  autofocus: !_status,
                                                 ),
-                                              ],
-                                            )),
-
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                         Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 25.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Text(
-                                                      'Address',
-                                                      style: TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            )),
-                                        Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 2.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Flexible(
-                                                  flex: 1,
-                                                  child: TextField(
-                                                    controller:
-                                                    _addressController,
-                                                    decoration:
-                                                    const InputDecoration(
-                                                      hintText: "Address",
-                                                    ),
-                                                    enabled: !_status,
-                                                    autofocus: !_status,
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: <Widget>[
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                mainAxisSize:
+                                                    MainAxisSize.min,
+                                                children: [
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                                context)!
+                                                            .translate(
+                                                                "lastName") ??
+                                                        "Last name",
+                                                    style: const TextStyle(
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.bold),
                                                   ),
-                                                ),
-                                              ],
-                                            )),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                         Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 25.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Column(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment.start,
-                                                  mainAxisSize:
-                                                      MainAxisSize.min,
-                                                  children: [
-                                                    Text(
-                                                      'Phone Number',
-                                                      style: TextStyle(
-                                                          fontSize: 16.0,
-                                                          fontWeight:
-                                                              FontWeight.bold),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ],
-                                            )),
-                                        Padding(
-                                            padding: const EdgeInsets.only(
-                                                left: 25.0,
-                                                right: 25.0,
-                                                top: 2.0),
-                                            child: Row(
-                                              mainAxisSize: MainAxisSize.max,
-                                              children: <Widget>[
-                                                Flexible(
-                                                  flex: 1,
-                                                  child: TextField(
-                                                    controller:
-                                                        _phoneController,
-                                                    decoration:
-                                                        const InputDecoration(
-                                                            hintText:
-                                                                "Enter Phone Number"),
-                                                    enabled: false,
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: <Widget>[
+                                              Flexible(
+                                                flex: 1,
+                                                child: TextField(
+                                                  controller:
+                                                      _lastNameController,
+                                                  decoration: InputDecoration(
+                                                    border: OutlineInputBorder(),
+                                                    hintText: AppLocalizations
+                                                                .of(context)!
+                                                            .translate(
+                                                                "lastName") ??
+                                                        "Last name",
                                                   ),
+                                                  enabled: !_status,
+                                                  autofocus: !_status,
                                                 ),
-                                              ],
-                                            )),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: <Widget>[
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                mainAxisSize:
+                                                    MainAxisSize.min,
+                                                children: [
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                                context)!
+                                                            .translate(
+                                                                "email") ??
+                                                        "Email",
+                                                    style: const TextStyle(
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: <Widget>[
+                                              Flexible(
+                                                child: TextField(
+                                                  controller:
+                                                      _emailController,
+                                                  decoration:
+                                                       InputDecoration(
+                                                          border:
+                                                          OutlineInputBorder(),
+                                                          hintText:
+                                                          AppLocalizations.of(
+                                                              context)!
+                                                              .translate(
+                                                              "email") ??
+                                                              "Email",),
+                                                  enabled: false,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: <Widget>[
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                mainAxisSize:
+                                                    MainAxisSize.min,
+                                                children: [
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                                context)!
+                                                            .translate(
+                                                                "address") ??
+                                                        "Address",
+                                                    style: const TextStyle(
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: <Widget>[
+                                              Flexible(
+                                                flex: 1,
+                                                child: TextField(
+                                                  controller:
+                                                      _addressController,
+                                                  decoration: InputDecoration(
+                                                    border:
+                                                    OutlineInputBorder(),
+                                                    hintText: AppLocalizations
+                                                                .of(context)!
+                                                            .translate(
+                                                                "address") ??
+                                                        "Address",
+                                                  ),
+                                                  enabled: !_status,
+                                                  autofocus: !_status,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: <Widget>[
+                                              Column(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.start,
+                                                mainAxisSize:
+                                                    MainAxisSize.min,
+                                                children: [
+                                                  Text(
+                                                    AppLocalizations.of(
+                                                                context)!
+                                                            .translate(
+                                                                "phone") ??
+                                                        "Phone",
+                                                    style: const TextStyle(
+                                                        fontSize: 16.0,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                ],
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Row(
+                                            mainAxisSize: MainAxisSize.max,
+                                            children: <Widget>[
+                                              Flexible(
+                                                flex: 1,
+                                                child: TextFormField(
+                                                  controller:
+                                                      _phoneController,
+                                                  decoration: InputDecoration(
+                                                    border:
+                                                        OutlineInputBorder(),
+                                                    hintText: AppLocalizations
+                                                                .of(context)!
+                                                            .translate(
+                                                                "phone") ??
+                                                        "Phone",
+                                                  ),
+                                                  enabled: false,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
                                         !_status
                                             ? _getActionButtons()
                                             : Container(),
@@ -400,24 +434,41 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
           Expanded(
             flex: 2,
             child: Padding(
-              padding: const EdgeInsets.only(right: 10.0),
+              padding: const EdgeInsets.all(8.0),
               child: SolidBtn(
-                Text: const Text(
-                  'Save',
-                  style: TextStyle(color: ColorsManager.white),
+                Text:  Text(
+                  AppLocalizations
+                      .of(context)!
+                      .translate(
+                      "save") ??
+                      "Save",
+                  style:const TextStyle(color: ColorsManager.white),
                 ),
                 onPressed: () async {
-                  UserModel model = UserModel(
-                      firstName: _firstNameController.text.trim(),
-                      lastName: _lastNameController.text.trim(),
-                      address: "",
-                      phone: Phone(phoneNumber: _phoneController.text.trim()),
-                      email: Email(address: "", verified: false));
+                  ProfileDataRequest model = ProfileDataRequest(
+                    lName: _lastNameController.text.trim(),
+                    address: _addressController.text.trim(),
+                    fName: _firstNameController.text.trim(),
+                  );
+
                   await di
                       .sl<ProfileCubit>()
                       .updateProfile(model)
                       .then((value) {
-                    print(value);
+                    PanaraInfoDialog.showAnimatedGrow(
+                      context,
+                      imagePath: 'assets/images/success.png',
+                      title: "Profile update",
+                      message: "Your profile updated successfully",
+                      buttonText: "Ok",
+                      onTapDismiss: () {
+                        setState(() {
+                          _status = true;
+                        });
+                        Navigator.of(context).pop();
+                      },
+                      panaraDialogType: PanaraDialogType.normal,
+                    );
                   });
                 },
               ),
@@ -426,11 +477,15 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
           Expanded(
             flex: 2,
             child: Padding(
-              padding: const EdgeInsets.only(left: 10.0),
+              padding: const EdgeInsets.all(8.0),
               child: SolidBtn(
-                Text: const Text(
-                  'Cancel',
-                  style: TextStyle(color: ColorsManager.white),
+                Text: Text(
+                    AppLocalizations
+                        .of(context)!
+                        .translate(
+                        "cancel") ??
+                        "Cancel",
+                  style:const TextStyle(color: ColorsManager.white),
                 ),
                 onPressed: () {
                   setState(() {

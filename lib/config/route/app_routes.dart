@@ -49,10 +49,10 @@ class AppRoutes {
           return const CountryScreen();
         });
 
-      case AppRouteName.login:
-        return MaterialPageRoute(builder: (context) {
-          return const LoginPage();
-        });
+      // case AppRouteName.login:
+      //   return MaterialPageRoute(builder: (context) {
+      //     return LoginPage(countries: [],);
+      //   });
 
       case AppRouteName.account:
         return MaterialPageRoute(builder: (context) {

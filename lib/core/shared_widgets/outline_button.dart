@@ -13,7 +13,7 @@ class OutLinedBtn extends StatelessWidget {
   Widget build(BuildContext context) {
     return OutlinedButton(
       style: OutlinedButton.styleFrom(
-          side: const BorderSide(color: ColorsManager.black, width: 1)),
+          side: const BorderSide(color: Color(0xff175b88), width: 2)),
       onPressed: onPressed,
       child: Padding(padding: const EdgeInsets.all(10.0), child: Text),
     );

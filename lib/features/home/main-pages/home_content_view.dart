@@ -2,6 +2,7 @@ import 'package:bein_ecommerce/features/home/products/data/models/product_model.
 import 'package:bein_ecommerce/features/home/products/presentation/pages/single_product_view.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../config/localization/app_localization.dart';
 import '../../../core/shared_widgets/components.dart';
 import '../../../core/shared_widgets/error_widgts.dart';
@@ -31,72 +32,39 @@ class HomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    List<CartModel> cartList = [];
-    return SizedBox(
-      width: w,
-      height: h,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.vertical,
-        physics: const BouncingScrollPhysics(),
-        child: Column(
-          children: [
-            /* const SizedBox(height: 20), */
-            const Divider(
-              color: Colors.black,
-            ),
-            const SizedBox(height: 10),
-            const CategoryHomeIcon(),
-            const SizedBox(height: 10),
-            const HomeSlider(),
-            const SizedBox(height: 20),
-            MarksView(width: w),
-            const SizedBox(height: 10),
-            const SizedBox(height: 20),
-            SizedBox(
-                width: w * 0.95,
-                child: TitleSection(
-                  text: AppLocalizations.of(context)!.translate("products") ??
-                      "Products",
-                  isViewMore: true,
-                )),
-            const SizedBox(height: 20),
-            SizedBox(
-              width: w ,
-              height: h ,
-
-              child: BlocProvider(
-                  create: (context) => di.sl<CartCubit>()..getCart(),
-                  child: BlocConsumer<CartCubit, CartState>(
-                    listener: (context, state) => di.sl<CartCubit>(),
-                    builder: (context, state) {
-                      cartList = CartCubit.get(context).cartModel;
-                      Widget body() {
-                        if (state is CartLoading) {
-                          return const LoadingScreen();
-                        } else if (state is CartError) {
-                          return AppErrorWidget(
-                            onPress: () {},
-                          );
-                        } else {
-                          return AllProductsView(
-                            products: products,
-                            cartList: cartList,
-                          );
-                        }
-                      }
-
-                      return SafeArea(
-                        child: Scaffold(
-                          backgroundColor: ColorsManager.background,
-                          body: body(),
-                        ),
-                      );
-                    },
-                  )),
-            )
-          ],
+    return ListView(
+      children: [
+        /* const SizedBox(height: 20), */
+        const Divider(
+          color: Colors.black,
         ),
-      ),
+        const SizedBox(height: 10),
+        const CategoryHomeIcon(),
+        const SizedBox(height: 10),
+        SizedBox(width: double.infinity, height: 200.h, child:const HomeSlider()),
+        // const SizedBox(height: 20),
+        // MarksView(width: w),
+        
+        const SizedBox(height: 10),
+        SizedBox(
+            width: w * 0.95,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: TitleSection(
+                text: AppLocalizations.of(context)!.translate("products") ??
+                    "Products",
+                isViewMore: true,
+              ),
+            )),
+        const SizedBox(height: 15),
+        SizedBox(
+            width: w,
+            height: h,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              child: AllProductsView(products: products),
+            )),
+      ],
     );
   }
 }

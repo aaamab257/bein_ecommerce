@@ -1,4 +1,5 @@
 import 'package:bein_ecommerce/features/user/auth/login/presentation/manager/login_cubit.dart';
+import 'package:bein_ecommerce/features/user/profile/data/local/models/profile_data_request.dart';
 import 'package:bein_ecommerce/features/user/profile/data/local/models/user_model.dart';
 import 'package:dartz/dartz.dart';
 import 'package:dio/dio.dart';
@@ -12,7 +13,7 @@ import '../../../../../splash/presentation/localization/local_bloc/local_cubit.d
 abstract class ProfileRemoteDataSource {
   Future<Either<Failure, UserModel>> getUserData();
 
-  Future<Either<Failure, bool>> updateUserData(UserModel user);
+  Future<Either<Failure, bool>> updateUserData(ProfileDataRequest user);
 }
 
 class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
@@ -56,7 +57,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, bool>> updateUserData(UserModel user) async {
+  Future<Either<Failure, bool>> updateUserData(ProfileDataRequest user) async {
     String token = "", lang = '';
     await di.sl<LoginCubit>().getToken().then((value) {
       token = value;
@@ -70,8 +71,8 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       Map<String, dynamic> response = await apiConsumer.post(
           EndPoints.getProfile,
           {
-            "firstname": user.firstName,
-            "lastname": user.lastName,
+            "firstname": user.fName,
+            "lastname": user.lName,
             "address": user.address,
           },
           Options(
