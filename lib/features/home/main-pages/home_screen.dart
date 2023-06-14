@@ -29,14 +29,12 @@ class _HomeScreenState extends State<HomeScreen>
   List<ProductModel> products = [];
   final int index = 0;
 
-
-
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       systemNavigationBarDividerColor: Color(0xff212121),
       systemNavigationBarColor: Color(0xff212121),
-      statusBarColor: ColorsManager.background,
+
     ));
     super.initState();
   }
@@ -72,7 +70,7 @@ class _HomeScreenState extends State<HomeScreen>
 
           return SafeArea(
             child: Scaffold(
-              backgroundColor: ColorsManager.background,
+
               appBar: buildPreferredSize(),
               body: _body1(),
             ),
@@ -86,37 +84,53 @@ class _HomeScreenState extends State<HomeScreen>
     var size = MediaQuery.of(context).size;
 
     return PreferredSize(
-      preferredSize: Size(size.width * 0.5, 80),
-      child: InkWell(
-        onTap: (){
-          Navigator.pushNamed(context, AppRouteName.search);
-        },
-        child: Container(
-          margin: const EdgeInsets.all(10),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              border: Border.all(color: ColorsManager.grey),
-              color: ColorsManager.white),
-          padding: const EdgeInsets.fromLTRB(16, 16, 16, 16),
-          child: RichText(
-            text: TextSpan(
-              children: [
-                const WidgetSpan(
-                  child: Padding(
-                    padding: EdgeInsets.only(right: 8 , left: 8),
-                    child:
-                        Icon(Icons.search, color: ColorsManager.grey, size: 18),
+      preferredSize: Size(size.width * 0.5, 100),
+      child: Container(
+        margin: const EdgeInsets.all(10),
+        decoration: const BoxDecoration(),
+        padding: const EdgeInsets.fromLTRB(10, 10, 16, 16),
+        child: Row(
+          children: [
+            Expanded(
+              flex: 4,
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, AppRouteName.search);
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(right: 5, left: 5),
+                  child: TextField(
+                    enabled: false,
+                    decoration: InputDecoration(
+                      border: const OutlineInputBorder(),
+                      hintText:
+                          AppLocalizations.of(context)!.translate("search") ??
+                              "Search",
+                    ),
                   ),
                 ),
-                TextSpan(
-                    text: AppLocalizations.of(context)!.translate("search") ??
-                        "Search",
-                    style:
-                        const TextStyle(fontSize: 16, color: ColorsManager.grey)),
-              ],
+              ),
             ),
-          ),
+            Expanded(
+              flex: 1,
+              child: InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, AppRouteName.notifications);
+                },
+                child: Container(
+                  margin: const EdgeInsets.only(right: 5, left: 5),
+                  alignment: Alignment.center,
+                  child: const Icon(
+                    Icons.notifications_none,
+
+                  ),
+                ),
+              ),
+            ),
+
+          ],
         ),
+
       ), /*Container(
         margin: EdgeInsets.all(10),
         child: TextField(

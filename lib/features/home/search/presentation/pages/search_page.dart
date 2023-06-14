@@ -41,7 +41,11 @@ class _SearchScreenState extends State<SearchScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: ColorsManager.background,
+
+          centerTitle: true,
+          title: Text(
+            AppLocalizations.of(context)!.translate("search") ?? "Search",
+          ),
         ),
         backgroundColor: ColorsManager.background,
         body: Padding(
@@ -90,7 +94,7 @@ class _SearchScreenState extends State<SearchScreen> {
                             borderRadius: BorderRadius.circular(8)),
                         child: const Icon(
                           Icons.search,
-                          color: ColorsManager.white,
+
                         ),
                       ),
                     ),

@@ -30,9 +30,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
             title: Text(AppLocalizations.of(context)!.translate("checkout") ??
                 "Checkout"),
             centerTitle: true,
-            backgroundColor: ColorsManager.background,
+
           ),
-          backgroundColor: ColorsManager.background,
+
           body: Container(
             child: BlocConsumer<CartCubit, CartState>(
                 listener: (context, state) => di.sl<CartCubit>(),

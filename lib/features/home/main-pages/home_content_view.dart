@@ -36,7 +36,7 @@ class HomeContent extends StatelessWidget {
       children: [
         /* const SizedBox(height: 20), */
         const Divider(
-          color: Colors.black,
+          color: Colors.grey,
         ),
         const SizedBox(height: 10),
         const CategoryHomeIcon(),

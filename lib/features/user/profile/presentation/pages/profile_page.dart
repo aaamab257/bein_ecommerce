@@ -72,10 +72,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 } else {
                   return SafeArea(
                     child: Scaffold(
-                        appBar: AppBar(
-                            backgroundColor: ColorsManager.background,
-                            automaticallyImplyLeading: false),
-                        backgroundColor: ColorsManager.background,
+
+
                         body: _isLogged
                             ? const LoggedProfile()
                             : const GestProfile()),
@@ -85,10 +83,10 @@ class _ProfilePageState extends State<ProfilePage> {
 
               return SafeArea(
                 child: Scaffold(
-                  backgroundColor: ColorsManager.background,
+
                   body: Container(
                     child: body(),
-                    color: ColorsManager.background,
+
                   ),
                 ),
               );

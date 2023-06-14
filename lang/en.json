@@ -64,5 +64,6 @@
   "skip": "Skip",
   "next": "Next",
   "empty_fields":"Please Fill the empty fields",
-  "added_to_cart":"Added Successfully"
+  "added_to_cart":"Added Successfully",
+  "dark_mode": "Dark Mode"
 }

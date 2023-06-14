@@ -48,7 +48,7 @@ class EmptyCart extends StatelessWidget {
                             ?.translate('show_shops') ??
                         "show_shops",
                     style: const TextStyle(
-                        fontSize: 18, color: ColorsManager.white),
+                        fontSize: 18, ),
                   ),
                 ),
         ),

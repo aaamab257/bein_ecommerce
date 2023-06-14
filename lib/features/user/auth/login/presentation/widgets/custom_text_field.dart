@@ -77,7 +77,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
               : null,
     enabledBorder: OutlineInputBorder(
       borderSide:
-          const BorderSide(width:1, color: ColorsManager.white),
+          const BorderSide(width:1,),
       borderRadius: BorderRadius.circular(50.0),
     ),
   ),

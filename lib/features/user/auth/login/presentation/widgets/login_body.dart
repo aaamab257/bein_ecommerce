@@ -78,7 +78,7 @@ class _LoginBodyState extends State<LoginBody> {
               } else {
                 return SafeArea(
                   child: Scaffold(
-                    backgroundColor: ColorsManager.background,
+
                     body: Container(
                       child: Stack(
                         children: [
@@ -135,9 +135,6 @@ class _LoginBodyState extends State<LoginBody> {
                                                   ?.translate("phone") ??
                                               "Phone number",
                                           filled: true,
-                                          hintStyle: TextStyle(
-                                              color: Colors.grey[800]),
-                                          fillColor: ColorsManager.background,
                                           alignLabelWithHint: true,
                                           isDense: false,
                                         ),
@@ -148,7 +145,7 @@ class _LoginBodyState extends State<LoginBody> {
                                               child: Text(
                                                 'Please Enter your phone',
                                                 style: TextStyle(
-                                                    color: ColorsManager.red,
+
                                                     fontSize: 13.0),
                                               ),
                                             )
@@ -170,10 +167,7 @@ class _LoginBodyState extends State<LoginBody> {
                                                         ?.translate("email") ??
                                                     "Email",
                                                 filled: true,
-                                                hintStyle: TextStyle(
-                                                    color: Colors.grey[800]),
-                                                fillColor:
-                                                    ColorsManager.background,
+
                                                 alignLabelWithHint: true,
                                                 isDense: true,
                                               ),
@@ -187,9 +181,7 @@ class _LoginBodyState extends State<LoginBody> {
                                               alignment: Alignment.centerLeft,
                                               child: Text(
                                                 'Please Enter your Email',
-                                                style: const TextStyle(
-                                                    color: ColorsManager.red,
-                                                    fontSize: 18.0),
+
                                               ),
                                             )
                                           : const SizedBox(),
@@ -201,9 +193,7 @@ class _LoginBodyState extends State<LoginBody> {
                                               alignment: Alignment.centerLeft,
                                               child: Text(
                                                 'This Email already taken by another user',
-                                                style: TextStyle(
-                                                    color: ColorsManager.red,
-                                                    fontSize: 13.0),
+
                                               ),
                                             )
                                           : const SizedBox(),
@@ -341,15 +331,7 @@ class _LoginBodyState extends State<LoginBody> {
                                                     );
                                                 setState(() {
                                                   isEmptyPhone = false;
-                                                  // showSnackBar(
-                                                  //     context,
-                                                  //     AppLocalizations.of(
-                                                  //                 context)!
-                                                  //             .translate(
-                                                  //                 "empty_fields") ??
-                                                  //         "Please fill Empty Fields",
-                                                  //     ColorsManager.white,
-                                                  //     const Color(0xff064A7B));
+
                                                 });
                                               } else {
                                                 setState(() {
@@ -433,9 +415,7 @@ class _LoginBodyState extends State<LoginBody> {
                                       AppLocalizations.of(context)
                                               ?.translate('continue') ??
                                           "Continue",
-                                      style: const TextStyle(
-                                          fontSize: 18,
-                                          color: ColorsManager.white),
+
                                     ),
                                   ),
                                   const SizedBox(
@@ -455,10 +435,10 @@ class _LoginBodyState extends State<LoginBody> {
 
             return SafeArea(
               child: Scaffold(
-                backgroundColor: ColorsManager.background,
+
                 body: Container(
                   child: _body1(),
-                  color: ColorsManager.background,
+
                 ),
               ),
             );

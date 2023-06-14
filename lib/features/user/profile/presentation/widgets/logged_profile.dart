@@ -36,9 +36,9 @@ class _LoggedProfileState extends State<LoggedProfile> {
                 title: Text(
                   AppLocalizations.of(context)
                           ?.translate("account_info") ??
-                      "account_info",style: const TextStyle(color: ColorsManager.black),
+                      "account_info",
                 ),
-                trailing: const Icon(Icons.arrow_forward_ios,size: 20 ,color: ColorsManager.black),
+                trailing: const Icon(Icons.arrow_forward_ios,size: 20),
                 onTap: () {
                   Navigator.pushNamed(context, AppRouteName.profile);
                 },
@@ -47,13 +47,13 @@ class _LoggedProfileState extends State<LoggedProfile> {
             Card(
               child: ListTile(
                 leading: const Icon(Icons.change_circle_rounded,
-                    color: ColorsManager.black),
+                    ),
                 title: Text(
                   AppLocalizations.of(context)
                           ?.translate("change_country") ??
-                      "Change_country",style: const TextStyle(color: ColorsManager.black),
+                      "Change_country",
                 ),
-                trailing: const Icon(Icons.arrow_forward_ios,size: 20 ,color: ColorsManager.black),
+                trailing: const Icon(Icons.arrow_forward_ios,size: 20 ),
                 onTap: () {
                   Navigator.pushNamed(
                       context, AppRouteName.country);
@@ -62,13 +62,13 @@ class _LoggedProfileState extends State<LoggedProfile> {
             ),
             Card(
               child: ListTile(
-                leading: const Icon(Icons.list_alt_rounded,color: ColorsManager.black),
+                leading: const Icon(Icons.list_alt_rounded),
                 title: Text(
                   AppLocalizations.of(context)
                           ?.translate("my_orders") ??
-                      "My_orders",style: const TextStyle(color: ColorsManager.black),
+                      "My_orders",
                 ),
-                trailing: const Icon(Icons.arrow_forward_ios,size: 20 ,color: ColorsManager.black),
+                trailing: const Icon(Icons.arrow_forward_ios,size: 20 ),
                 onTap: () {
                   Navigator.pushNamed(context, AppRouteName.myOrders);
                 },
@@ -88,8 +88,7 @@ class _LoggedProfileState extends State<LoggedProfile> {
                   Text: Text(
                     AppLocalizations.of(context)?.translate("log_out") ??
                         "log_out",
-                    style:
-                        const TextStyle(color: Color(0xff175b88), fontSize: 18),
+
                   ),
                   onPressed: () {
                     LoginCubit.get(context).saveToken("").then((value) {

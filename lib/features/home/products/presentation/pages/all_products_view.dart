@@ -70,7 +70,7 @@ class _AllProductsViewState extends State<AllProductsView> {
 
             return SafeArea(
               child: Scaffold(
-                backgroundColor: ColorsManager.background,
+
                 body: body(),
               ),
             );

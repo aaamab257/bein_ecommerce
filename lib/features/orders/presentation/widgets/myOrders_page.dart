@@ -39,7 +39,7 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
                         horizontal: 10.0, vertical: 6.0),
                     child: Container(
                       decoration: const BoxDecoration(
-                          color: ColorsManager.grey),
+                          ),
                       child: ListTile(
                         contentPadding: const EdgeInsets.symmetric(
                             horizontal: 20.0, vertical: 10.0),
@@ -50,7 +50,7 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
                                   right: BorderSide(
                                       width: 1.0, color: Colors.white24))),
                           child: const Icon(Icons.list_rounded,
-                              color: Colors.white),
+                              ),
                         ),
                         title: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -58,7 +58,7 @@ class _MyOrdersPageState extends State<MyOrdersPage> {
                             Text(
                               '${widget.myOrdersList[index].orderItem!.length} Products ',
                               style: const TextStyle(
-                                  color: Colors.white,
+
                                   fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(

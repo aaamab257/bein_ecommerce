@@ -4,10 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:bein_ecommerce/di.dart' as di;
-import 'package:flutter_bloc/flutter_bloc.dart';
-import '../../../../core/shared_widgets/error_widgts.dart';
-import '../../../../core/shared_widgets/loading_screen.dart';
-import '../../../../core/utils/colors/colors_manager.dart';
+
 import '../../data/local/models/cart_model.dart';
 import '../manager/cart_state.dart';
 import 'cart_item.dart';
@@ -58,11 +55,11 @@ class _CartBodyState extends State<CartBody> {
                   background: Container(
                     width: 50,
                     decoration: BoxDecoration(
-                        color: ColorsManager.red,
+
                         borderRadius: BorderRadius.circular(10)),
                     child: Icon(
                       Icons.delete_outline,
-                      color: ColorsManager.white,
+
                       size: 25,
                     ),
                   ),
@@ -95,7 +92,7 @@ class _CartBodyState extends State<CartBody> {
                                   widget.cart[index].product!.en!.title ?? "",
                                   overflow: TextOverflow.ellipsis,
                                   style: TextStyle(
-                                      color: ColorsManager.black,
+
                                       fontWeight: FontWeight.bold,
                                       fontSize: 20),
                                 ),
@@ -110,14 +107,14 @@ class _CartBodyState extends State<CartBody> {
                                             text:
                                                 "${widget.cart[index].product!.en!.description}",
                                             style: const TextStyle(
-                                                color: ColorsManager.grey,
+
                                                 fontWeight: FontWeight.w400,
                                                 fontSize: 14),
                                             children: [
                                               TextSpan(
                                                 text: "",
                                                 style: TextStyle(
-                                                    color: ColorsManager.black,
+
                                                     fontWeight: FontWeight.w400,
                                                     fontSize: 14),
                                               )
@@ -140,8 +137,7 @@ class _CartBodyState extends State<CartBody> {
                                           horizontal: 10, vertical: 7),
                                       decoration: BoxDecoration(
                                         borderRadius: BorderRadius.circular(5),
-                                        color:
-                                            ColorsManager.grey.withOpacity(.1),
+
                                       ),
                                       child: Row(
                                         children: [

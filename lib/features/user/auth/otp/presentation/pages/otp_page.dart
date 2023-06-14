@@ -18,9 +18,9 @@ class _OtpPageState extends State<OtpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: ColorsManager.background,
+
       appBar: AppBar(
-        backgroundColor: ColorsManager.background,
+
       ),
       body: OtpBody(phone: widget.phone),
     );

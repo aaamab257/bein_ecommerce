@@ -61,7 +61,7 @@ class _HomeSliderState extends State<HomeSlider> {
             }
 
             return Scaffold(
-              backgroundColor: ColorsManager.background,
+
               body: _body1(),
             );
           },

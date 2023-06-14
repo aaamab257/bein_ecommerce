@@ -68,7 +68,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                 } else {
                   return Scaffold(
                       appBar: AppBar(
-                        backgroundColor: ColorsManager.splashBackground,
+
                         centerTitle: true,
                         title: Text(
                           AppLocalizations.of(context)?.translate("account") ??
@@ -78,7 +78,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                         ),
                       ),
                       body: Container(
-                        color: Colors.white,
+
                         child: ListView(
                           children: <Widget>[
                             Column(
@@ -383,7 +383,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                                                       _phoneController,
                                                   decoration: InputDecoration(
                                                     border:
-                                                        OutlineInputBorder(),
+                                                       const OutlineInputBorder(),
                                                     hintText: AppLocalizations
                                                                 .of(context)!
                                                             .translate(
@@ -412,7 +412,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
               }
 
               return Scaffold(
-                backgroundColor: ColorsManager.background,
+
                 body: body(),
               );
             }));
@@ -442,7 +442,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                       .translate(
                       "save") ??
                       "Save",
-                  style:const TextStyle(color: ColorsManager.white),
+
                 ),
                 onPressed: () async {
                   ProfileDataRequest model = ProfileDataRequest(
@@ -485,7 +485,7 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
                         .translate(
                         "cancel") ??
                         "Cancel",
-                  style:const TextStyle(color: ColorsManager.white),
+
                 ),
                 onPressed: () {
                   setState(() {
@@ -504,11 +504,11 @@ class _AccountInfoScreenState extends State<AccountInfoScreen> {
   Widget _getEditIcon() {
     return GestureDetector(
       child: const CircleAvatar(
-        backgroundColor: Colors.red,
+
         radius: 14.0,
         child: Icon(
           Icons.edit,
-          color: Colors.white,
+
           size: 16.0,
         ),
       ),

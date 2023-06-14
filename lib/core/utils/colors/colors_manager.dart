@@ -8,8 +8,13 @@ class ColorsManager{
   static const Color splashBackground = Colors.white;
   static const Color starIconColor = Colors.amber;
   static const black = Color.fromARGB(255, 43, 43, 43);
-  static const background = Color.fromARGB(255, 255, 255, 253);
+  static const background = Color(0xffFEFBFF);
   static const lightBlue = Color(0x8298D7FF);
+  static const statusBarColor = Color(0xffD3AFDB);
+  static const cardBorderColor = Color(0xff88489E);
+  static const settingsIconsColor = Color(0xffA1C15C);
+  static const appBarColor = Color(0xffFFFFFF);
+
   //8298D7FF
   static const orange = MaterialColor(0xffe57f47, {
     50: Color(0xffe57f47),

@@ -27,6 +27,7 @@ void onConnect(StompFrame frame) async{
 
    stompClient.subscribe(
       destination: '/channel/all',
+
       callback: (frame) async {
 
         dynamic result = json.decode(frame.body!);

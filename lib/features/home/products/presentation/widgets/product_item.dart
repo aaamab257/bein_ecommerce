@@ -68,7 +68,7 @@ class _ProductItemState extends State<ProductItem> {
                     textAlign: TextAlign.start,
                     maxLines: 3,
                     style: const TextStyle(
-                        color: ColorsManager.black,
+
                         fontSize: 13,
                         fontWeight: FontWeight.bold),
                   ),

@@ -72,10 +72,8 @@ class _SingleProductCartState extends State<SingleProductCart> {
                 } else {
                   return SafeArea(
                     child: Scaffold(
-                      appBar: AppBar(
-                        backgroundColor: ColorsManager.background,
-                      ),
-                      backgroundColor: ColorsManager.background,
+
+
                       body: Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
@@ -105,13 +103,13 @@ class _SingleProductCartState extends State<SingleProductCart> {
                                               background: Container(
                                                 width: 50,
                                                 decoration: BoxDecoration(
-                                                    color: ColorsManager.red,
+
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10)),
                                                 child: const Icon(
                                                   Icons.delete_outline,
-                                                  color: ColorsManager.white,
+
                                                   size: 25,
                                                 ),
                                               ),
@@ -310,7 +308,7 @@ class _SingleProductCartState extends State<SingleProductCart> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 10),
                               decoration: const BoxDecoration(
-                                color: Colors.white,
+
                               ),
                               child: Center(
                                 child: Row(
@@ -324,7 +322,7 @@ class _SingleProductCartState extends State<SingleProductCart> {
                                                   .translate("total") ??
                                               "Total",
                                           style: const TextStyle(
-                                              color: Colors.grey,
+
                                               fontSize: 13,
                                               fontWeight: FontWeight.normal),
                                         ),
@@ -383,10 +381,10 @@ class _SingleProductCartState extends State<SingleProductCart> {
 
               return SafeArea(
                 child: Scaffold(
-                  backgroundColor: ColorsManager.background,
+
                   body: Container(
                     child: _body1(),
-                    color: ColorsManager.background,
+
                   ),
                 ),
               );

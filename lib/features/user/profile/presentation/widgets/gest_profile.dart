@@ -47,37 +47,40 @@ class _GestProfileState extends State<GestProfile> {
                 children: [
                   Positioned(
                       top: 0,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(
-                                AppLocalizations.of(context)?.translate(
-                                        "profile_notLogged_title") ??
-                                    "profile_notLogged_title",
-                                style: const TextStyle(
-                                    fontSize: 25,
-                                    fontWeight: FontWeight.bold),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20.0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(
+                                  AppLocalizations.of(context)?.translate(
+                                          "profile_notLogged_title") ??
+                                      "profile_notLogged_title",
+                                  style: const TextStyle(
+                                      fontSize: 25,
+                                      fontWeight: FontWeight.bold),
+                                ),
                               ),
-                            ),
-                            const SizedBox(
-                              height: 8.0,
-                            ),
-                            Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text(
-                                AppLocalizations.of(context)?.translate(
-                                        "profile_notLogged_subTitle") ??
-                                    "profile_notLogged_subTitle",
+                              const SizedBox(
+                                height: 8.0,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                                child: Text(
+                                  AppLocalizations.of(context)?.translate(
+                                          "profile_notLogged_subTitle") ??
+                                      "profile_notLogged_subTitle",
 
-                                style: const TextStyle(fontSize: 16.0,),
+                                  style: const TextStyle(fontSize: 16.0,),
+                                ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       )),
                   Positioned(
@@ -99,7 +102,7 @@ class _GestProfileState extends State<GestProfile> {
                                       ?.translate('show_shops') ??
                                   "show_shops",
                               style: const TextStyle(
-                                  fontSize: 16, color: ColorsManager.white),
+                                  fontSize: 16,),
                             ),
                           ),
                           const SizedBox(

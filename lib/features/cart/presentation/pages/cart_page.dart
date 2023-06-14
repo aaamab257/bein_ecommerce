@@ -1,6 +1,5 @@
 import 'package:bein_ecommerce/config/route/app_routes.dart';
-import 'package:bein_ecommerce/core/utils/colors/colors_manager.dart';
-import 'package:bein_ecommerce/features/cart/presentation/widgets/cart_with_products.dart';
+
 import 'package:bein_ecommerce/features/user/auth/login/presentation/manager/login_cubit.dart';
 
 import 'package:flutter/material.dart';
@@ -78,10 +77,10 @@ class _CartPageState extends State<CartPage> {
                     child: Scaffold(
                       appBar: widget.index == 1
                           ? AppBar(
-                              backgroundColor: ColorsManager.background,
+
                             )
                           : null,
-                      backgroundColor: ColorsManager.background,
+
                       body: Container(
                         width: MediaQuery.of(context).size.width,
                         height: MediaQuery.of(context).size.height,
@@ -111,13 +110,13 @@ class _CartPageState extends State<CartPage> {
                                               background: Container(
                                                 width: 50,
                                                 decoration: BoxDecoration(
-                                                    color: ColorsManager.red,
+
                                                     borderRadius:
                                                         BorderRadius.circular(
                                                             10)),
                                                 child: const Icon(
                                                   Icons.delete_outline,
-                                                  color: ColorsManager.white,
+
                                                   size: 25,
                                                 ),
                                               ),
@@ -310,7 +309,7 @@ class _CartPageState extends State<CartPage> {
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 15, vertical: 10),
                               decoration: const BoxDecoration(
-                                color: Colors.white,
+
                               ),
                               child: Center(
                                 child: Row(
@@ -324,7 +323,7 @@ class _CartPageState extends State<CartPage> {
                                                   .translate("total") ??
                                               "Total",
                                           style: const TextStyle(
-                                              color: Colors.grey,
+
                                               fontSize: 13,
                                               fontWeight: FontWeight.normal),
                                         ),
@@ -383,10 +382,10 @@ class _CartPageState extends State<CartPage> {
 
               return SafeArea(
                 child: Scaffold(
-                  backgroundColor: ColorsManager.background,
+
                   body: Container(
                     child: _body1(),
-                    color: ColorsManager.background,
+
                   ),
                 ),
               );

@@ -37,9 +37,7 @@ class _SearchViewState extends State<SearchView> {
           ],
         ),
       ),
-      appBar: AppBar(
-        backgroundColor: ColorsManager.background,
-      ),
+
     );
   }
 }

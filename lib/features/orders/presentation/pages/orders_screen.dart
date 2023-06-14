@@ -41,14 +41,14 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
               );
             } else {
               return Scaffold(
-                backgroundColor: ColorsManager.background,
+
                 body: myOrders.isEmpty
                     ? const EmptyMyOrders()
                     : MyOrdersPage(
                         myOrdersList: myOrders,
                       ),
                 appBar: AppBar(
-                  backgroundColor: ColorsManager.background,
+
                   elevation: 0,
                   centerTitle: true,
                   title: Text(
@@ -63,9 +63,9 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
           return Scaffold(
             body: Container(
               child: _body(),
-              color: ColorsManager.background,
+
             ),
-            backgroundColor: ColorsManager.background,
+
           );
         },
       ),

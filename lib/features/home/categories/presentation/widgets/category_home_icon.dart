@@ -33,14 +33,14 @@ class CategoryHomeIcon extends StatelessWidget {
                           AppLocalizations.of(context)!.translate('category') ??
                               "Category",
                           style: const TextStyle(
-                              color: Colors.black, fontSize: 18),
+                               fontSize: 18),
                         ),
                         const SizedBox(
                           width: 8,
                         ),
                         const Icon(
                           Icons.list,
-                          color: ColorsManager.black,
+
                         ),
                       ],
                     ),
@@ -72,15 +72,14 @@ class CategoryHomeIcon extends StatelessWidget {
                       Text(
                         AppLocalizations.of(context)!.translate('deals') ??
                             "Deals",
-                        style:
-                            const TextStyle(color: Colors.black, fontSize: 18),
+
                       ),
                       const SizedBox(
                         width: 8,
                       ),
                       const Icon(
                         Icons.pending_actions,
-                        color: ColorsManager.black,
+
                       ),
                     ],
                   ),

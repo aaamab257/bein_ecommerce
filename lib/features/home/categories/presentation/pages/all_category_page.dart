@@ -53,7 +53,7 @@ class _AllCategoryPageState extends State<AllCategoryPage> {
 
           return SafeArea(
             child: Scaffold(
-              backgroundColor: ColorsManager.background,
+
               
               body: _body1(),
             ),
