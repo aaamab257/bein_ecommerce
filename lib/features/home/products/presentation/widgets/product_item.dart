@@ -36,70 +36,75 @@ class _ProductItemState extends State<ProductItem> {
                   cart: widget.cartList,
                 )));
       },
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Container(
+      child: Container(
+        decoration: BoxDecoration(
+          
+            border: Border.all(
+              color: Theme.of(context).accentColor,
+              width: 2,
+            ),
+            borderRadius: const BorderRadius.only(
+                bottomLeft: Radius.circular(8.0),
+                bottomRight: Radius.circular(8.0),
+                topLeft: Radius.circular(8.0),
+                topRight: Radius.circular(8.0))),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
               width: 67,
               height: 86,
               child: Image.network(
                 widget.products.images![0].url!,
               ),
             ),
-          const SizedBox(
-            height: 20,
-          ),
-          Container(
-            height: 90,
-            decoration: const BoxDecoration(
-                color: Color(0xffF2F2F2),
-                borderRadius: BorderRadius.only(
-                    bottomLeft: Radius.circular(8.0),
-                    bottomRight: Radius.circular(8.0))),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8.0 ),
-                  child: Text(
-                    widget.products.data!.title!,
-                    textAlign: TextAlign.start,
-                    maxLines: 3,
-                    style: const TextStyle(
-
-                        fontSize: 13,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const RateView(starsCount: 4.5, reviewsCount: 15),
-                      const SizedBox(
-                        height: 2,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            PriceWidget(
-                                price: widget.products.price.toString()),
-                          ],
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ],
+            const SizedBox(
+              height: 20,
             ),
-          )
-        ],
+            Container(
+              height: 90,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      widget.products.data!.title!,
+                      textAlign: TextAlign.start,
+                      maxLines: 3,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        const RateView(starsCount: 4.5, reviewsCount: 15),
+                        const SizedBox(
+                          height: 2,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(2.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceAround,
+                            children: [
+                              PriceWidget(
+                                  price: widget.products.price.toString()),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

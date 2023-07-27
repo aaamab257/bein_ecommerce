@@ -35,9 +35,8 @@ class _HomeSliderState extends State<HomeSlider> {
           builder: (context, state) {
             imgs = OffersCubit.get(context).imgs;
             offersModel = OffersCubit.get(context).offersModel;
-            debugPrint('offer Model ============================ ${offersModel.id}');
-
-
+            debugPrint(
+                'offer Model ============================ ${offersModel.id}');
 
             Widget _body1() {
               if (state is OffersLoading) {
@@ -47,21 +46,28 @@ class _HomeSliderState extends State<HomeSlider> {
                   onPress: () {},
                 );
               } else {
-                return ImageSlideshow(
-                  width: double.infinity,
-                  height: 200.h,
-                  autoPlayInterval: 3000,
-                  isLoop: true,
-                  indicatorBackgroundColor: const Color(0xff54c8f7),
-                  indicatorColor: const Color(0xff175b88),
-                  indicatorRadius: 3,
-                  children: imgs,
+                return Padding(
+                  padding: const EdgeInsets.only(left: 15.0, right: 15.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
+                    child: ImageSlideshow(
+                      width: double.infinity,
+                      height: 200.h,
+                      autoPlayInterval: 3000,
+                      isLoop: true,
+                      indicatorBackgroundColor: const Color(0xff54c8f7),
+                      indicatorColor: const Color(0xff175b88),
+                      indicatorRadius: 3,
+                      children: imgs,
+                    ),
+                  ),
                 );
               }
             }
 
             return Scaffold(
-
               body: _body1(),
             );
           },

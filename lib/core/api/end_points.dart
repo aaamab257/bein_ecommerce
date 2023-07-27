@@ -5,7 +5,7 @@ class EndPoints {
   // static const String BASE_URL =
   //     'http://52.58.177.44:8082/api/v1/'; // Online Server
   static const String BASE_URL =
-      'http://3.122.230.133:8082/api/v1/';
+      'http://3.127.147.186:8082/api/v1/';
 
   static const String COUNTRIES = '${BASE_URL}countries';
   static const String PRODUCTS = '${BASE_URL}app/products';
@@ -35,7 +35,7 @@ class EndPoints {
 
   static const String getMyOrders = '${BASE_URL}orders/my-orders';
 
-  static const String socketURL = 'http://52.58.177.44:8082/ws';
+  static const String socketURL = 'http://3.127.147.186:8082/ws';
 
   // offers
   static const String getOffers = '${BASE_URL}adds';

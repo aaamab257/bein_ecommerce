@@ -39,12 +39,11 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 children: [
                   Padding(
                     padding: const EdgeInsets.all(8.0),
-                    child:Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: const [
                         Icon(
                           Icons.location_on_outlined,
-
                         ),
                         SizedBox(
                           width: 10,
@@ -94,7 +93,8 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                 height: 450,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(15),
-
+                  border:
+                      Border.all(width: 1, color: Theme.of(context).cardColor),
                 ),
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -117,11 +117,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5),
-                                    borderSide: const BorderSide(
-                                         width: 0.5),
+                                    borderSide: const BorderSide(width: 0.5),
                                   ),
                                   filled: true,
-
                                   hintText: AppLocalizations.of(context)!
                                           .translate("name") ??
                                       "Your Name",
@@ -143,11 +141,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xffF5F5F5), width: 0.5),
+                                    borderSide: const BorderSide(width: 0.5),
                                   ),
                                   filled: true,
-                                  fillColor: Color(0xffF5F5F5),
                                   hintText: AppLocalizations.of(context)!
                                           .translate("email") ??
                                       "Your Email",
@@ -169,11 +165,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                                 decoration: InputDecoration(
                                   border: OutlineInputBorder(
                                     borderRadius: BorderRadius.circular(5),
-                                    borderSide: const BorderSide(
-                                        color: Color(0xffF5F5F5), width: 0.5),
+                                    borderSide: const BorderSide(width: 0.5),
                                   ),
                                   filled: true,
-                                  fillColor: Color(0xffF5F5F5),
                                   hintText: AppLocalizations.of(context)!
                                           .translate("message") ??
                                       "Your Message",
@@ -189,9 +183,9 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                           crossAxisAlignment: CrossAxisAlignment.stretch,
                           children: [
                             SolidBtn(
-                                Text: const Text(
+                                Text: Text(
                                   'Send',
-                                  style: TextStyle(color: ColorsManager.white),
+                                  style: Theme.of(context).textTheme.bodySmall,
                                 ),
                                 onPressed: () {}),
                           ],

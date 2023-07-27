@@ -30,7 +30,7 @@ class _RateViewState extends State<RateView> {
             padding: const EdgeInsets.symmetric(vertical: 2, horizontal: 3),
             decoration: BoxDecoration(
 
-                color: const Color(0xff175b88),
+                color: Theme.of(context).iconTheme.color,
                 borderRadius: BorderRadius.circular(5),
 
             ),
@@ -41,10 +41,7 @@ class _RateViewState extends State<RateView> {
                 children: [
                   Text(
                     widget.starsCount.toString(),
-                    style: const TextStyle(
-                        color: Colors.white,
-                        fontSize: 16.0,
-                        fontWeight: FontWeight.bold),
+                    style: Theme.of(context).textTheme.bodySmall,
                   ),
                   const SizedBox(width: 3),
                   const Icon(

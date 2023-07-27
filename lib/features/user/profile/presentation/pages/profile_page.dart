@@ -55,41 +55,41 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-        create: (context) => di.sl<LoginCubit>(),
-        child: BlocConsumer<LoginCubit, LoginState>(
-            listener: (context, state) => di.sl<LoginCubit>(),
-            builder: (context, state) {
-              Widget body() {
-                if (state is LoginLoading) {
-                  return const LoadingScreen();
-                } else if (state is LoginError) {
-                  return AppErrorWidget(
-                    onPress: () {
-                      setState(() {});
-                    },
-                  );
-                } else {
-                  return SafeArea(
-                    child: Scaffold(
+    return Scaffold();
+    // return BlocProvider(
+    //     create: (context) => di.sl<LoginCubit>(),
+    //     child: BlocConsumer<LoginCubit, LoginState>(
+    //         listener: (context, state) => di.sl<LoginCubit>(),
+    //         builder: (context, state) {
+    //           Widget body() {
+    //             if (state is LoginLoading) {
+    //               return const LoadingScreen();
+    //             } else if (state is LoginError) {
+    //               return AppErrorWidget(
+    //                 onPress: () {
+    //                   setState(() {});
+    //                 },
+    //               );
+    //             } else {
+    //               return SafeArea(
+    //                 child: Scaffold(
 
+    //                     body: _isLogged
+    //                         ? const LoggedProfile()
+    //                         : const GestProfile()),
+    //               );
+    //             }
+    //           }
 
-                        body: _isLogged
-                            ? const LoggedProfile()
-                            : const GestProfile()),
-                  );
-                }
-              }
+    //           return SafeArea(
+    //             child: Scaffold(
 
-              return SafeArea(
-                child: Scaffold(
+    //               body: Container(
+    //                 child: body(),
 
-                  body: Container(
-                    child: body(),
-
-                  ),
-                ),
-              );
-            })); /**/
+    //               ),
+    //             ),
+    //           );
+    //         })); /**/
   }
 }

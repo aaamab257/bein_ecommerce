@@ -27,7 +27,6 @@ class _AllCategoryPageState extends State<AllCategoryPage> {
 
   @override
   Widget build(BuildContext context) {
-    
     return BlocProvider(
       create: (context) => di.sl<CategoryCubit>()..getCategory(),
       child: BlocConsumer<CategoryCubit, CategoryState>(
@@ -45,7 +44,6 @@ class _AllCategoryPageState extends State<AllCategoryPage> {
               );
             } else {
               return AllCategoryBody(
-                
                 categoryItem: category,
               );
             }
@@ -53,8 +51,6 @@ class _AllCategoryPageState extends State<AllCategoryPage> {
 
           return SafeArea(
             child: Scaffold(
-
-              
               body: _body1(),
             ),
           );
@@ -65,8 +61,9 @@ class _AllCategoryPageState extends State<AllCategoryPage> {
 }
 
 class AllCategoryBody extends StatefulWidget {
-  final List<CategoryItem> categoryItem ;
-  const AllCategoryBody({super.key ,required this.categoryItem});
+  final List<CategoryItem> categoryItem;
+
+  const AllCategoryBody({super.key, required this.categoryItem});
 
   @override
   State<AllCategoryBody> createState() => _AllCategoryBodyState();
@@ -78,18 +75,16 @@ class _AllCategoryBodyState extends State<AllCategoryBody> {
     double w = MediaQuery.of(context).size.width;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: ColorsManager.background,
         appBar: AppBar(
           centerTitle: false,
-          backgroundColor: ColorsManager.background,
           title: Text(
             AppLocalizations.of(context)!.translate('category') ?? "Category",
-            style: const TextStyle(color: Colors.black, fontSize: 18),
+
           ),
         ),
         body: Container(
           width: w,
-          margin: const EdgeInsets.only(left: 10 , right: 10),
+          margin: const EdgeInsets.only(left: 10, right: 10),
           child: SingleChildScrollView(
             scrollDirection: Axis.vertical,
             child: Column(
@@ -110,7 +105,7 @@ class _AllCategoryBodyState extends State<AllCategoryBody> {
                             children: [
                               CircleAvatar(
                                 radius: 28,
-                                backgroundColor: Colors.white,
+
                                 child: Padding(
                                   padding: const EdgeInsets.all(10.0),
                                   child: Image.asset(brandes[0]["image"]),
@@ -119,7 +114,7 @@ class _AllCategoryBodyState extends State<AllCategoryBody> {
                               const SizedBox(width: 10),
                               Text(
                                 widget.categoryItem[index].name!,
-                                style: const TextStyle(fontSize: 16),
+
                               ),
                             ],
                           ),

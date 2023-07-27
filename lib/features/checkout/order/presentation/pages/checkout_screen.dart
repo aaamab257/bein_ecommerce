@@ -44,6 +44,7 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
                     return AppErrorWidget(
                       onPress: () {
                         setState(() {});
+
                       },
                     );
                   } else {

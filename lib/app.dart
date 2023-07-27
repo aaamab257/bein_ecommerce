@@ -6,6 +6,7 @@ import 'package:bein_ecommerce/features/settings/presentation/manager/theme_stat
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'config/localization/App_localization_setup.dart';
 import 'config/route/app_routes.dart';
 import 'config/themes/dark_theme.dart';
@@ -14,7 +15,9 @@ import 'features/splash/presentation/localization/local_bloc/local_cubit.dart';
 import 'package:bein_ecommerce/di.dart' as di;
 
 class BeInApp extends StatelessWidget {
-  const BeInApp({Key? key}) : super(key: key);
+  final ThemeMode themeMode;
+
+  const BeInApp({Key? key, required this.themeMode}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -46,8 +49,9 @@ class BeInApp extends StatelessWidget {
                         localizationsDelegates:
                             AppLocalizationsSetup.localizationsDelegates,
                         title: 'Be In',
+                        themeMode: themeMode,
                         theme: themeState.changeTheme,
-
+                        darkTheme: darkTheme,
                         onGenerateRoute: AppRoutes.onGenerateRoute,
                       );
                     },

@@ -51,6 +51,10 @@ dependencies:
   line_icons: ^2.0.1
   devicelocale: ^0.6.0
   intl_phone_field: ^3.1.0
+  convex_bottom_bar: ^3.2.0
+  curved_navigation_bar: ^1.0.3
+  fancy_bottom_navigation: ^0.3.2
+
 
 
 
@@ -82,19 +86,20 @@ flutter:
 #    - images/a_dot_ham.jpeg
 
   fonts:
-    - family: tajawal
+    - family: cairo
       fonts:
-        - asset: assets/fonts/tajawal/Tajawal-Black.ttf
+        - asset: assets/fonts/cairo/Cairo-Black.ttf
           weight: 900
-        - asset: assets/fonts/tajawal/Tajawal-ExtraBold.ttf
+        - asset: assets/fonts/cairo/Cairo-ExtraBold.ttf
           weight: 800
-        - asset: assets/fonts/tajawal/Tajawal-Bold.ttf
+        - asset: assets/fonts/cairo/Cairo-Bold.ttf
           weight: 700
-        - asset: assets/fonts/tajawal/Tajawal-Medium.ttf
+        - asset: assets/fonts/cairo/Cairo-Medium.ttf
           weight: 600
-        - asset: assets/fonts/tajawal/Tajawal-Regular.ttf
+        - asset: assets/fonts/cairo/Cairo-Regular.ttf
           weight: 500
-        - asset: assets/fonts/tajawal/Tajawal-Light.ttf
+        - asset: assets/fonts/cairo/Cairo-Light.ttf
           weight: 400
-        - asset: assets/fonts/tajawal/Tajawal-ExtraLight.ttf
+        - asset: assets/fonts/cairo/Cairo-ExtraLight.ttf
           weight: 300
+    

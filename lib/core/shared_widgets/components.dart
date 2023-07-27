@@ -5,12 +5,14 @@ import '../utils/app_string/app_strings.dart';
 import '../utils/colors/colors_manager.dart';
 
 class PriceWidget extends StatelessWidget {
-  final String price ;
+  final String price;
+
   final Color? customColor;
 
   const PriceWidget({
     this.customColor,
-    super.key, required this.price,
+    super.key,
+    required this.price,
   });
 
   @override
@@ -18,36 +20,38 @@ class PriceWidget extends StatelessWidget {
     return Text(
       textAlign: TextAlign.center,
       "$price ${AppLocalizations.of(context)!.translate(AppStringsKey.currency) ?? ""}",
-      style: const TextStyle(color: ColorsManager.black , fontSize: 14 , fontWeight: FontWeight.bold ),
+      style: Theme.of(context).textTheme.bodySmall,
     );
   }
 }
 
 class TitleSection extends StatelessWidget {
-  final String text ;
-  final bool? isViewMore ;
-  const TitleSection({Key? key, required this.text, this.isViewMore}) : super(key: key);
+  final String text;
+
+  final bool? isViewMore;
+
+  const TitleSection({Key? key, required this.text, this.isViewMore})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children:  [
-          Text(
-            text,
-            style: const TextStyle(
-              fontSize: 22,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-          ),
-          isViewMore ==true ?Text(
-            AppLocalizations.of(context)!.translate("viewMore") ??"View_More",
-            style:  TextStyle(
-              fontSize: 18.sp,
-              color: Colors.blueAccent,
-            ),
-          ) : const SizedBox(),
-        ]);
+    return Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+      Text(
+        text,
+        style: const TextStyle(
+          fontSize: 22,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+      isViewMore == true
+          ? Text(
+              AppLocalizations.of(context)!.translate("viewMore") ??
+                  "View_More",
+              style: TextStyle(
+                fontSize: 18.sp,
+              ),
+            )
+          : const SizedBox(),
+    ]);
   }
 }

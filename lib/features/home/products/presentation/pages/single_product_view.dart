@@ -1,5 +1,6 @@
 import 'package:bein_ecommerce/config/localization/app_localization.dart';
 import 'package:bein_ecommerce/core/shared_widgets/custom_snackbar.dart';
+import 'package:bein_ecommerce/core/shared_widgets/solid_button.dart';
 import 'package:bein_ecommerce/core/utils/app_string/app_strings.dart';
 import 'package:bein_ecommerce/core/utils/colors/colors_manager.dart';
 import 'package:bein_ecommerce/features/cart/data/local/models/cart_model.dart';
@@ -121,7 +122,9 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                             ),
                             AppBar(
                               elevation: 0,
-                              backgroundColor: Theme.of(context).highlightColor.withOpacity(0),
+                              backgroundColor: Theme.of(context)
+                                  .highlightColor
+                                  .withOpacity(0),
                               leading: InkWell(
                                 onTap: () {
                                   if (Navigator.canPop(context)) {
@@ -131,12 +134,10 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                 child: Container(
                                   margin: EdgeInsets.all(10.h),
                                   decoration: const BoxDecoration(
-
                                     shape: BoxShape.circle,
                                   ),
                                   child: const Icon(
                                     Icons.arrow_back,
-
                                   ),
                                 ),
                               ),
@@ -154,7 +155,6 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                       height: 50,
                                       margin: EdgeInsets.all(10.h),
                                       decoration: const BoxDecoration(
-
                                         shape: BoxShape.circle,
                                       ),
                                       child: Stack(
@@ -166,7 +166,6 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                             bottom: 0,
                                             child: Icon(
                                               Icons.shopping_cart,
-
                                             ),
                                           ),
                                           CartCubit.get(context).length != 0
@@ -178,14 +177,12 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                                     height: 20,
                                                     decoration:
                                                         const BoxDecoration(
-
                                                       shape: BoxShape.circle,
                                                     ),
                                                     child: Center(
                                                       child: Text(
                                                         '${CartCubit.get(context).length}',
                                                         style: const TextStyle(
-
                                                             fontSize: 13.0,
                                                             fontWeight:
                                                                 FontWeight
@@ -235,7 +232,9 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                               AppLocalizations.of(context)
                                                       ?.translate("desc") ??
                                                   "desc",
-
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText2,
                                             ),
                                           ),
                                           Tab(
@@ -243,7 +242,9 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                               AppLocalizations.of(context)
                                                       ?.translate("details") ??
                                                   "details",
-
+                                              style: Theme.of(context)
+                                                  .textTheme
+                                                  .bodyText2,
                                             ),
                                           )
                                         ],
@@ -260,11 +261,9 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                                 height: 10,
                                               ),
                                               Text(
-                                                  widget.productModel.data!
-                                                      .description!,
-                                                  style: Theme.of(context)
-                                                      .textTheme
-                                                      .displaySmall),
+                                                widget.productModel.data!
+                                                    .description!,
+                                              ),
                                             ],
                                           ),
                                           ListView(
@@ -296,7 +295,6 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                                       Text(
                                                         "$detailsKey :",
                                                         style: const TextStyle(
-
                                                             fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight
@@ -308,7 +306,6 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                                       Text(
                                                         detailsValue,
                                                         style: const TextStyle(
-
                                                             fontSize: 16,
                                                             fontWeight:
                                                                 FontWeight
@@ -346,12 +343,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                           children: [
                             Flexible(
                               flex: 1,
-                              child: ElevatedButton(
-                                style: ElevatedButton.styleFrom(
-                                    primary: const Color(0xff175b88),
-                                    textStyle: Theme.of(context)
-                                        .textTheme
-                                        .titleMedium),
+                              child: SolidBtn(
                                 onPressed: () async {
                                   await di
                                       .sl<CartCubit>()
@@ -380,7 +372,7 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                                     });
                                   });
                                 },
-                                child: Row(
+                                Text: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     const Icon(Icons.add_shopping_cart),
@@ -400,7 +392,6 @@ class _SingleProductScreenState extends State<SingleProductScreen>
                               flex: 1,
                               child: PriceWidget(
                                 price: widget.productModel.price.toString(),
-
                               ),
                             )
                           ],
@@ -415,7 +406,6 @@ class _SingleProductScreenState extends State<SingleProductScreen>
 
           return SafeArea(
             child: Scaffold(
-
               body: _body1(),
             ),
           );

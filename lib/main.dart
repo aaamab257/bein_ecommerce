@@ -12,6 +12,7 @@ import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:intl/intl.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:stomp_dart_client/stomp.dart';
 import 'package:stomp_dart_client/stomp_config.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
@@ -58,15 +59,19 @@ final stompClient = StompClient(
   },
   onWebSocketError: (dynamic error) => print(error.toString()),
 ));
-
+Future<ThemeMode> getThemeMode() async {
+  final prefs = await SharedPreferences.getInstance();
+  final index = prefs.getInt('themeMode') ?? ThemeMode.system.index;
+  return ThemeMode.values[index];
+}
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  stompClient.activate();
+  final themeMode = await getThemeMode();
+  //stompClient.activate();
 
 
   await di.init();
   Bloc.observer = AppBlocObserver();
 
-  runApp(const BeInApp());
+  runApp(BeInApp(themeMode:themeMode));
 }

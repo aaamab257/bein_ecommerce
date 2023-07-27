@@ -32,7 +32,7 @@ class _LoggedProfileState extends State<LoggedProfile> {
             ),
             Card(
               child: ListTile(
-                leading: const Icon(Icons.person_outline ,color: ColorsManager.black),
+                leading: const Icon(Icons.person_outline ),
                 title: Text(
                   AppLocalizations.of(context)
                           ?.translate("account_info") ??
@@ -88,6 +88,7 @@ class _LoggedProfileState extends State<LoggedProfile> {
                   Text: Text(
                     AppLocalizations.of(context)?.translate("log_out") ??
                         "log_out",
+                    style: Theme.of(context).textTheme.bodySmall,
 
                   ),
                   onPressed: () {

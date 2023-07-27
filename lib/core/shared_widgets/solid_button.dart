@@ -18,10 +18,7 @@ class _SolidBtnState extends State<SolidBtn> {
   @override
   Widget build(BuildContext context) {
     return OutlinedButton(
-      
       style: OutlinedButton.styleFrom(
-        backgroundColor:Color(0xff88489E),
-        
       ),
       onPressed: widget.onPressed,
       

@@ -1,6 +1,9 @@
 import 'package:bein_ecommerce/core/utils/colors/colors_manager.dart';
 import 'package:bein_ecommerce/features/home/main-pages/home_screen.dart';
 import 'package:bein_ecommerce/features/settings/presentation/pages/settings_page.dart';
+import 'package:bein_ecommerce/features/user/profile/presentation/pages/account_settings.dart';
+import 'package:curved_navigation_bar/curved_navigation_bar.dart';
+import 'package:fancy_bottom_navigation/fancy_bottom_navigation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -8,10 +11,14 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 import 'package:stomp_dart_client/stomp_frame.dart';
 import '../../../config/localization/app_localization.dart';
 import '../../cart/presentation/pages/cart_page.dart';
+import '../../on_boarding/presentation/manager/countries_cubit.dart';
+import '../../requestes/presentation/pages/requestes_page.dart';
 import '../../user/profile/presentation/pages/profile_page.dart';
-import '../notification/notification_page.dart';
+import 'package:animated_bottom_navigation_bar/animated_bottom_navigation_bar.dart';
 import '../products/data/data_sources/remote_data_source/all_products_remote_data_source.dart';
 import 'package:bein_ecommerce/di.dart' as di;
+
+import '../services/pages/services_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -21,12 +28,14 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  String iniCountry = '';
+  List<String> countries = [];
+
   @override
   void initState() {
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       systemNavigationBarDividerColor: Color(0xff212121),
       systemNavigationBarColor: Color(0xff212121),
-
     ));
     AllProductsRemoteDataSourceImpl(apiConsumer: di.sl()).getAllProducts();
 
@@ -40,18 +49,19 @@ class _MainScreenState extends State<MainScreen> {
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.w600);
   int _selectedIndex = 0;
+  GlobalKey<CurvedNavigationBarState> _bottomNavigationKey = GlobalKey();
   final iconList = <IconData>[
-    Icons.shopping_bag_outlined,
-    Icons.shopping_cart_checkout_outlined,
-    Icons.person_outline,
-    Icons.settings_outlined,
+    Icons.home_outlined,
+    Icons.category_outlined,
+    Icons.menu_book_outlined,
+    Icons.person_2_outlined,
   ];
+
   static const List<Widget> _widgetOptions = <Widget>[
     HomeScreen(),
-    CartPage(index: 0,),
-    ProfilePage(),
-    SettingsPage(),
-
+    ServicesScreen(),
+    RequestesScreen(),
+    AccountSettings(),
   ];
 
   void _onItemTapped(int index) {
@@ -62,64 +72,66 @@ class _MainScreenState extends State<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final labels = <String>[
+      AppLocalizations.of(context)!.translate('home') ?? "Home",
+      AppLocalizations.of(context)!.translate('services') ?? "Services",
+      AppLocalizations.of(context)!.translate('requests') ?? "Requests",
+      AppLocalizations.of(context)!.translate('account') ?? "Account",
+    ];
     return Scaffold(
-
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      bottomNavigationBar: GNav(
-
-          gap:8,
-          style: GnavStyle.google,
-          textStyle:const TextStyle(fontSize: 20 , color: Color(0xFF175b88) ) ,
-          activeColor:const Color(0xFF175b88),
-          iconSize: 18,
-
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          padding: const EdgeInsets.symmetric(horizontal: 25, vertical: 12),
-          duration:const Duration(milliseconds: 500),
-
-          tabs: [
-            GButton(
-              icon: Icons.shopping_bag_outlined,
-
-              text: AppLocalizations.of(context)?.translate("home") ?? "Home",
-            ),
-            GButton(
-              icon: Icons.shopping_cart_checkout_outlined,
-
-              text: AppLocalizations.of(context)?.translate("cart") ?? "Cart",
-            ),
-            GButton(
-              icon: Icons.person_outline,
-
-              text: AppLocalizations.of(context)?.translate("account") ??
-                  "Account",
-            ),
-            GButton(
-              icon: Icons.settings_outlined,
-
-              text: AppLocalizations.of(context)?.translate("settings") ??
-                  "Settings",
-            ),
-
-          ],
-          selectedIndex: _selectedIndex,
-          onTabChange: _onItemTapped),
-
+      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButton: buildFloatingActionButton(),
+      bottomNavigationBar: AnimatedBottomNavigationBar.builder(
+        itemCount: 4,
+        tabBuilder: (int index, bool isActive) {
+          final color = isActive
+              ? Theme.of(context).primaryColorDark
+              : Theme.of(context).primaryColor;
+          return Column(
+            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                iconList[index],
+                size: 24,
+                color: color,
+              ),
+              const SizedBox(height: 4),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 8),
+                child: Text(
+                  labels[index],
+                  maxLines: 1,
+                  style: TextStyle(color: color),
+                ),
+              )
+            ],
+          );
+        },
+        backgroundColor: Theme.of(context).accentColor,
+        key: _bottomNavigationKey,
+        height: 80,
+        activeIndex: _selectedIndex,
+        gapLocation: GapLocation.none,
+        notchSmoothness: NotchSmoothness.verySmoothEdge,
+        onTap: (index) {
+          _onItemTapped(index);
+        },
+      ),
     );
   }
 
   FloatingActionButton buildFloatingActionButton() {
     return FloatingActionButton(
-
       onPressed: () async {
-        AllProductsRemoteDataSourceImpl(apiConsumer: di.sl()).getAllProducts();
+        _onItemTapped(0);
+        //AllProductsRemoteDataSourceImpl(apiConsumer: di.sl()).getAllProducts();
       },
       child: const Icon(
-        Icons.home,
-        size: 24,
-
+        Icons.chat_bubble_outline_outlined,
       ),
     );
   }

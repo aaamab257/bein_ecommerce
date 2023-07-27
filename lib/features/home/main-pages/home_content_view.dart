@@ -1,20 +1,11 @@
+import 'package:bein_ecommerce/features/home/main-pages/top_card.dart';
 import 'package:bein_ecommerce/features/home/products/data/models/product_model.dart';
-import 'package:bein_ecommerce/features/home/products/presentation/pages/single_product_view.dart';
+import 'package:bein_ecommerce/features/home/products/presentation/pages/maybe_needs.dart';
+import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../config/localization/app_localization.dart';
-import '../../../core/shared_widgets/components.dart';
-import '../../../core/shared_widgets/error_widgts.dart';
-import '../../../core/shared_widgets/loading_screen.dart';
-import '../../../core/utils/colors/colors_manager.dart';
-import '../../cart/data/local/models/cart_model.dart';
-import '../../cart/presentation/manager/cart_cubit.dart';
-import '../../cart/presentation/manager/cart_state.dart';
-import '../categories/presentation/pages/category_view.dart';
-import '../categories/presentation/widgets/category_home_icon.dart';
 import '../products/presentation/pages/all_products_view.dart';
-import 'package:bein_ecommerce/di.dart' as di;
 import '../slider/presentation/pages/home_slider.dart';
 
 class HomeContent extends StatelessWidget {
@@ -22,9 +13,13 @@ class HomeContent extends StatelessWidget {
   final double h;
   final BuildContext context;
   final List<ProductModel> products;
+  String iniCountry = '';
+  List<String> countries = [];
 
-  const HomeContent(
+  HomeContent(
       {super.key,
+      required this.countries,
+      required this.iniCountry,
       required this.w,
       required this.h,
       required this.context,
@@ -32,39 +27,101 @@ class HomeContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        /* const SizedBox(height: 20), */
-        const Divider(
-          color: Colors.grey,
-        ),
-        const SizedBox(height: 10),
-        const CategoryHomeIcon(),
-        const SizedBox(height: 10),
-        SizedBox(width: double.infinity, height: 200.h, child:const HomeSlider()),
-        // const SizedBox(height: 20),
-        // MarksView(width: w),
-        
-        const SizedBox(height: 10),
-        SizedBox(
-            width: w * 0.95,
-            child: Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TitleSection(
-                text: AppLocalizations.of(context)!.translate("products") ??
-                    "Products",
-                isViewMore: true,
-              ),
-            )),
-        const SizedBox(height: 15),
-        SizedBox(
+    return SingleChildScrollView(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          HomeTopCard(countries: countries, iniCountry: iniCountry),
+          const SizedBox(height: 10),
+          SizedBox(
+              width: double.infinity, height: 200.h, child: const HomeSlider()),
+          // const SizedBox(height: 20),
+          // MarksView(width: w),
+
+          const SizedBox(height: 10),
+          SizedBox(
+              width: w * 0.95,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  AppLocalizations.of(context)!
+                          .translate("you_can_installment") ??
+                      "you_can_installment",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                  textAlign: TextAlign.center,
+                ),
+              )),
+          const SizedBox(height: 15),
+          SizedBox(
             width: w,
-            height: h,
+            height: 450.h,
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0),
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child: AllProductsView(products: products),
-            )),
-      ],
+            ),
+          ),
+          SizedBox(
+              width: w * 0.95,
+              child: Padding(
+                padding: const EdgeInsets.all(15.0),
+                child: Text(
+                  AppLocalizations.of(context)!.translate("you_maybe_need") ??
+                      "you_maybe_need",
+                  style: Theme.of(context).textTheme.headlineMedium,
+                  textAlign: TextAlign.center,
+                ),
+              )),
+          const SizedBox(height: 15),
+          SizedBox(
+            width: w,
+            child: const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 5.0),
+              child: MaybeNeeds(),
+            ),
+          ),
+          const SizedBox(height: 15),
+          SizedBox(
+            width: w,
+            height: 310,
+            child: Container(
+              margin: const EdgeInsets.all(15),
+              decoration: BoxDecoration(
+                border: Border.all(color: Colors.transparent),
+                borderRadius: BorderRadius.circular(25.0),
+                gradient: const LinearGradient(
+                  colors: [
+                    Color.fromARGB(255, 231, 225, 225),
+                    Color(0xff8457AB)
+                  ],
+                  begin: Alignment.centerLeft,
+                  end: Alignment.centerRight,
+                ),
+              ),
+              child: Stack(
+                children: [
+                  PositionedDirectional(
+                    top: 0,
+                    bottom: 0,
+                    start: 0,
+                    child: Image.asset('assets/images/bottom_widget.png'),
+                  ),
+                  PositionedDirectional(
+                    top: 0,
+                    bottom: 0,
+                    end: 0,
+                    child: Column(
+                      children: [
+                        
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          )
+        ],
+      ),
     );
   }
 }

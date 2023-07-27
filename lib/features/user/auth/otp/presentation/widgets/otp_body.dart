@@ -49,7 +49,7 @@ class _OtpBodyState extends State<OtpBody> {
               } else {
                 return SafeArea(
                   child: Scaffold(
-                    backgroundColor: ColorsManager.background,
+
                     /* appBar: AppBar(backgroundColor: ColorsManager.background), */
                     body: Container(
                       child: Stack(

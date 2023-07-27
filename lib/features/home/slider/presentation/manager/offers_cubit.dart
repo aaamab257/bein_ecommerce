@@ -32,9 +32,13 @@ class OffersCubit extends Cubit<OffersState> {
       debugPrint(offers.toString());
       offersModel = offers;
       for (var offer in offers.images!) {
-        imgs.add(Image.network(
-          offer.url!,
-          fit: BoxFit.cover,
+        imgs.add(ClipRRect(
+          borderRadius: BorderRadius.circular(25.0),
+          child: Image.network(
+            offer.url!,
+            fit: BoxFit.cover,
+            
+          ),
         ));
       }
       emit(OffersSuccess());

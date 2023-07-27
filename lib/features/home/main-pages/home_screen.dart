@@ -12,12 +12,14 @@ import '../../../core/shared_widgets/bottom_nav_bar.dart';
 import '../../../core/shared_widgets/error_widgts.dart';
 import '../../../core/shared_widgets/loading_screen.dart';
 import '../../../core/shared_widgets/menu.dart';
+import '../../on_boarding/presentation/manager/countries_cubit.dart';
+import '../notification/pages/notification_page.dart';
 import '../products/presentation/manager/product_state.dart';
 import 'home_content_view.dart';
 import 'package:bein_ecommerce/di.dart' as di;
 
 class HomeScreen extends StatefulWidget {
-  const HomeScreen({super.key});
+  const HomeScreen({super.key });
 
   @override
   State<HomeScreen> createState() => _HomeScreenState();
@@ -27,14 +29,28 @@ class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   var cubit = di.sl<ProductCubit>();
   List<ProductModel> products = [];
+  String iniCountry = '';
+  List<String> countries = [];
   final int index = 0;
 
   @override
   void initState() {
+     di.sl<CountriesCubit>().getCurrentCountry().then((value) {
+      iniCountry = value.code;
+      print(
+          'initial Country ===========                        ========= > ${iniCountry}');
+    });
+    //
+
+    di.sl<CountriesCubit>().getCountries().then((value) {
+      for (var country in value) {
+        countries.add(country.code);
+        print('country code ======= ? ${country.code}');
+      }
+    });
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       systemNavigationBarDividerColor: Color(0xff212121),
       systemNavigationBarColor: Color(0xff212121),
-
     ));
     super.initState();
   }
@@ -42,7 +58,7 @@ class _HomeScreenState extends State<HomeScreen>
   @override
   Widget build(BuildContext context) {
     double w = MediaQuery.of(context).size.width;
-    double h = MediaQuery.of(context).size.height;
+    double h = MediaQuery.of(context).size.height * 0.7;
     return BlocProvider(
       create: (context) => di.sl<ProductCubit>()..getProducts(),
       child: BlocConsumer<ProductCubit, ProductsState>(
@@ -64,13 +80,14 @@ class _HomeScreenState extends State<HomeScreen>
                 h: h,
                 context: context,
                 products: products,
+                countries: countries,
+                iniCountry: iniCountry,
               );
             }
           }
 
           return SafeArea(
             child: Scaffold(
-
               appBar: buildPreferredSize(),
               body: _body1(),
             ),
@@ -93,21 +110,11 @@ class _HomeScreenState extends State<HomeScreen>
           children: [
             Expanded(
               flex: 4,
-              child: InkWell(
-                onTap: () {
-                  Navigator.pushNamed(context, AppRouteName.search);
-                },
-                child: Container(
-                  margin: const EdgeInsets.only(right: 5, left: 5),
-                  child: TextField(
-                    enabled: false,
-                    decoration: InputDecoration(
-                      border: const OutlineInputBorder(),
-                      hintText:
-                          AppLocalizations.of(context)!.translate("search") ??
-                              "Search",
-                    ),
-                  ),
+              child: Container(
+                margin: const EdgeInsets.only(right: 5, left: 5),
+                child: Text(
+                  AppLocalizations.of(context)!.translate("welcome") ?? "Welcome in sinyar",
+                  style: Theme.of(context).textTheme.headlineMedium,
                 ),
               ),
             ),
@@ -115,6 +122,7 @@ class _HomeScreenState extends State<HomeScreen>
               flex: 1,
               child: InkWell(
                 onTap: () {
+                  
                   Navigator.pushNamed(context, AppRouteName.notifications);
                 },
                 child: Container(
@@ -122,15 +130,12 @@ class _HomeScreenState extends State<HomeScreen>
                   alignment: Alignment.center,
                   child: const Icon(
                     Icons.notifications_none,
-
                   ),
                 ),
               ),
             ),
-
           ],
         ),
-
       ), /*Container(
         margin: EdgeInsets.all(10),
         child: TextField(

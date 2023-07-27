@@ -12,7 +12,8 @@ import 'package:bein_ecommerce/features/user/profile/presentation/pages/profile_
 import 'package:flutter/material.dart';
 import '../../core/utils/assets_manager/img_manger.dart';
 import '../../features/home/main-pages/main_screen.dart';
-import '../../features/home/notification/notification_page.dart';
+
+import '../../features/home/notification/pages/notification_page.dart';
 import '../../features/home/products/presentation/pages/single_product_view.dart';
 import '../../features/on_boarding/presentation/pages/country_screen.dart';
 import '../../features/splash/presentation/splash_screen/screens/splash_screen.dart';

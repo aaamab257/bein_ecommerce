@@ -1,9 +1,126 @@
 import 'package:bein_ecommerce/core/utils/colors/colors_manager.dart';
 import 'package:flutter/material.dart';
 
-final darkTheme = ThemeData(
-  scaffoldBackgroundColor: Colors.grey.shade900,
-  primaryColor: Colors.black,
-  colorScheme: ColorScheme.dark(),
-  iconTheme: IconThemeData(color: Colors.purple.shade200, opacity: 0.8),
-);
+final ThemeData darkTheme = ThemeData(
+  brightness: Brightness.dark,
+  scaffoldBackgroundColor: Color.fromARGB(255, 26, 26, 27),
+  appBarTheme: const AppBarTheme(
+    backgroundColor: Color(0xffF8F9FE),
+    foregroundColor: Colors.black,
+    titleTextStyle: TextStyle(
+        fontSize: 20,
+        fontWeight: FontWeight.bold,
+        color: Color(0xff88489E),
+        fontFamily: 'Cairo'),
+    iconTheme: IconThemeData(
+      color: Color(0xffA5CD39),
+    ),
+  ),
+  accentColor: const Color(0xff6A2A80),
+  primaryColor: const Color(0xffE8E9EE),
+  primaryColorLight: Colors.white,
+  primaryColorDark: const Color(0xffA5CD39),
+  dividerColor: Colors.grey[400],
+  floatingActionButtonTheme: const FloatingActionButtonThemeData(
+    backgroundColor: Color(0xffFFFFFF),
+    foregroundColor: Color(0xffA5CD39),
+    elevation: 4.0,
+  ),
+  bottomNavigationBarTheme: const  BottomNavigationBarThemeData(
+    backgroundColor:  Color(0xff88489E),
+    selectedItemColor:  Color(0xffA5CD39),
+    unselectedItemColor: Colors.white,
+  ),
+  textTheme: const TextTheme(
+    headlineLarge: TextStyle(
+        fontSize: 30.0, fontWeight: FontWeight.normal, fontFamily: 'Cairo'),
+    headlineMedium: TextStyle(
+      fontSize: 20.0,
+      fontWeight: FontWeight.bold,
+      fontFamily: 'Cairo',
+      color: Color(0xff88489E),
+    ),
+    headlineSmall: TextStyle(
+        fontSize: 16.0,
+        fontWeight: FontWeight.normal,
+        color: Color(0xff88489E),
+        fontFamily: 'Cairo'),
+    bodyLarge:
+        TextStyle(fontSize: 22.0, color: Colors.white, fontFamily: 'Cairo'),
+    bodyMedium: TextStyle(
+      fontSize: 18.0,
+      color: Color(0xff88489E),
+      fontFamily: 'Cairo',
+    ),
+    bodySmall: TextStyle(
+        fontSize: 14.0, color: Color(0xff2E563E), fontFamily: 'Cairo'),
+  ),
+  cardTheme: CardTheme(
+    color: Color.fromARGB(255, 212, 207, 207),
+    elevation: 2.0,
+    margin: const EdgeInsets.symmetric(vertical: 5.0, horizontal: 24.0),
+    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4.0)),
+  ),
+  inputDecorationTheme: InputDecorationTheme(
+    filled: true,
+    fillColor: Colors.grey[200],
+    hintStyle: TextStyle(color: Colors.grey[400], fontFamily: 'Cairo'),
+    errorStyle: TextStyle(color: Colors.red[400], fontFamily: 'Cairo'),
+    border: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(4.0),
+      borderSide: BorderSide.none,
+    ),
+    enabledBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(4.0),
+      borderSide: BorderSide.none,
+    ),
+    focusedBorder: OutlineInputBorder(
+      borderRadius: BorderRadius.circular(4.0),
+      borderSide: BorderSide.none,
+    ),
+  ),
+  outlinedButtonTheme: OutlinedButtonThemeData(
+    style: ButtonStyle(
+      backgroundColor:
+          MaterialStateProperty.all<Color>(const Color(0xff88489E)),
+      textStyle: MaterialStateProperty.all<TextStyle>(
+        const TextStyle(
+          fontSize: 18,
+          color: ColorsManager.white,
+          fontWeight: FontWeight.bold,
+        ),
+      ),
+    ),
+  ),
+  iconTheme: const IconThemeData(
+    color: Color(0xffA5CD39), // The color of the icons.
+    opacity: 0.8, // The opacity of the icons.
+    size: 20,
+    // The size of the icons.
+  ),
+  elevatedButtonTheme: ElevatedButtonThemeData(
+    style: ButtonStyle(
+      minimumSize: MaterialStateProperty.all<Size>(
+        const Size(double.infinity, 50.0),
+      ),
+      backgroundColor:
+          MaterialStateProperty.all<Color>(const Color(0xff6D2D83)),
+      foregroundColor: MaterialStateProperty.all<Color>(Colors.white),
+      textStyle: MaterialStateProperty.all<TextStyle>(
+        const TextStyle(
+            color: Colors.white,
+            fontWeight: FontWeight.bold,
+            fontFamily: 'Cairo'),
+      ),
+      padding: MaterialStateProperty.all<EdgeInsetsGeometry>(
+        const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+      ),
+      shape: MaterialStateProperty.all<OutlinedBorder>(
+        RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(15.0),
+        ),
+      ),
+      elevation: MaterialStateProperty.all<double>(4.0),
+    ),
+  ),
+); /**/

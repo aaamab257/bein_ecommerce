@@ -18,10 +18,7 @@ class _OtpPageState extends State<OtpPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
-      appBar: AppBar(
-
-      ),
+      appBar: AppBar(),
       body: OtpBody(phone: widget.phone),
     );
   }

@@ -585,15 +585,7 @@ Widget _inputField(TextEditingController controller, String hint,
         controller: controller,
         focusNode: focusNode,
         keyboardType: inputType,
-        decoration: InputDecoration(
-          border: const OutlineInputBorder(),
-          hintText: hint,
-          filled: true,
-          hintStyle: TextStyle(color: Colors.grey[800]),
-          fillColor: ColorsManager.background,
-          alignLabelWithHint: true,
-          isDense: true,
-        ),
+
       ),
     ],
   );
