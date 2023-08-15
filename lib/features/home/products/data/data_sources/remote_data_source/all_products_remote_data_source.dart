@@ -13,7 +13,7 @@ import '../../models/slider_model.dart';
 abstract class AllProductsRemoteDataSource {
   Future<Either<Failure, List<ProductModel>>> getAllProducts();
 
-  Future<Either<Failure, OffersModel>> getOffers();
+  Future<Either<Failure, List<Imgs>>> getOffers();
 }
 
 class AllProductsRemoteDataSourceImpl implements AllProductsRemoteDataSource {
@@ -50,27 +50,23 @@ class AllProductsRemoteDataSourceImpl implements AllProductsRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, OffersModel>> getOffers() async {
-    String lang = "";
-    await di.sl<LocaleCubit>().getSavedLang().then((value) {
-      lang = value;
-      print('lang ============= $value');
-    });
+  Future<Either<Failure, List<Imgs>>> getOffers() async {
+    
     try {
       Map<String, dynamic> response = await apiConsumer.get(
           EndPoints.getOffers,
           Options(
             headers: {
-              'Accept-Language': lang,
+              'Accept-Language': 'en',
             },
           ));
 
-      dynamic id = response['id'];
-      List<dynamic> images = response['enImages'];
+      
+      List<dynamic> images = response['sliders'];
       List<Imgs> imgs = images.map((image) => Imgs.fromJson(image)).toList();
 
-      OffersModel offersModel = OffersModel(id: id, images: imgs);
-      return right(offersModel);
+      // OffersModel offersModel = OffersModel(id: id, images: imgs);
+      return right(imgs);
     } on Exception catch (e) {
       print(e.toString());
     }

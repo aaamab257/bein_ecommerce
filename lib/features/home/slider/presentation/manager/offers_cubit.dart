@@ -1,3 +1,4 @@
+import 'package:bein_ecommerce/core/api/end_points.dart';
 import 'package:bloc/bloc.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -16,26 +17,26 @@ class OffersCubit extends Cubit<OffersState> {
 
   static OffersCubit get(context) => BlocProvider.of(context);
 
-  OffersModel get getOffer => offersModel;
+  List<Imgs> get getOffer => offersModel;
 
-  OffersModel offersModel = OffersModel();
+  List<Imgs> offersModel = [];
   List<Widget> imgs = [];
 
 
 
-  Future<OffersModel> getOffers() async {
+  Future<List<Imgs>> getOffers() async {
     emit(OffersLoading());
     (await getAllProductsUseCase.getOffers()).fold((failure) {
       debugPrint("uuuuuuuuuuu" + failure.toString());
       emit(OffersError());
     }, (offers) {
       debugPrint(offers.toString());
-      offersModel = offers;
-      for (var offer in offers.images!) {
+      // offersModel = offers;
+      for (var offer in offers) {
         imgs.add(ClipRRect(
           borderRadius: BorderRadius.circular(25.0),
           child: Image.network(
-            offer.url!,
+            '${EndPoints.BASE_URL2}${offer.url!}',
             fit: BoxFit.cover,
             
           ),

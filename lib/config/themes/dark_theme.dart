@@ -21,14 +21,21 @@ final ThemeData darkTheme = ThemeData(
   primaryColorLight: Colors.white,
   primaryColorDark: const Color(0xffA5CD39),
   dividerColor: Colors.grey[400],
+  switchTheme: SwitchThemeData(
+    // Customize the colors
+    splashRadius: 50,
+    thumbColor: MaterialStateProperty.all(const Color(0xffA5CD39)),
+    trackColor: MaterialStateProperty.all(Colors.grey),
+    overlayColor: MaterialStateProperty.all(Colors.blue.withOpacity(0.5)),
+  ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
     backgroundColor: Color(0xffFFFFFF),
     foregroundColor: Color(0xffA5CD39),
     elevation: 4.0,
   ),
-  bottomNavigationBarTheme: const  BottomNavigationBarThemeData(
-    backgroundColor:  Color(0xff88489E),
-    selectedItemColor:  Color(0xffA5CD39),
+  bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+    backgroundColor: Color(0xff88489E),
+    selectedItemColor: Color(0xffA5CD39),
     unselectedItemColor: Colors.white,
   ),
   textTheme: const TextTheme(

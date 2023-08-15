@@ -17,6 +17,7 @@ class InstallmentRequestScreen extends StatefulWidget {
 
 class _InstallmentRequestScreenState extends State<InstallmentRequestScreen> {
   Set<int> _selectedIndices = Set<int>();
+  TextEditingController _depositCont = TextEditingController();
 
   void _toggleSelection(int index) {
     setState(() {
@@ -157,6 +158,7 @@ class _InstallmentRequestScreenState extends State<InstallmentRequestScreen> {
                   ),
                   const Divider(),
                   CustomTextField(
+                    controller: _depositCont,
                     hint: AppLocalizations.of(context)?.translate("0") ?? "0",
                     type: TextInputType.number,
                     isPassword: false,

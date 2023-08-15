@@ -1,13 +1,13 @@
 class OffersModel {
 
-  String? id;
+  
 
   List<Imgs>? images;
 
-  OffersModel({this.id, this.images});
+  OffersModel({this.images});
 
   OffersModel.fromJson(Map<String, dynamic> json) {
-    id = json['id'];
+    
     if (json['enImages'] != null) {
       images = <Imgs>[];
       json['enImages'].forEach((v) {
@@ -18,7 +18,7 @@ class OffersModel {
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
-    data['id'] = id;
+    
     if (images != null) {
       data['enImages'] = images!.map((v) => v.toJson()).toList();
     }
@@ -27,7 +27,7 @@ class OffersModel {
 }
 
 class Imgs {
-  String? id;
+  int? id;
 
   String? url;
 
@@ -35,13 +35,13 @@ class Imgs {
 
   Imgs.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    url = json['url'];
+    url = json['image'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
-    data['url'] = url;
+    data['image'] = url;
     return data;
   }
 }

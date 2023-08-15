@@ -1,9 +1,12 @@
 import 'package:bein_ecommerce/config/route/app_routes.dart';
 import 'package:bein_ecommerce/core/api/dio_consumer.dart';
 import 'package:bein_ecommerce/core/utils/colors/colors_manager.dart';
+import 'package:bein_ecommerce/features/home/categories/data/models/category_model.dart';
+import 'package:bein_ecommerce/features/home/categories/presentation/manager/category_cubit.dart';
 import 'package:bein_ecommerce/features/home/products/data/data_sources/remote_data_source/all_products_remote_data_source.dart';
 import 'package:bein_ecommerce/features/home/products/data/models/product_model.dart';
 import 'package:bein_ecommerce/features/home/products/presentation/manager/product_cubit.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -13,6 +16,7 @@ import '../../../core/shared_widgets/error_widgts.dart';
 import '../../../core/shared_widgets/loading_screen.dart';
 import '../../../core/shared_widgets/menu.dart';
 import '../../on_boarding/presentation/manager/countries_cubit.dart';
+import '../categories/presentation/manager/category_state.dart';
 import '../notification/pages/notification_page.dart';
 import '../products/presentation/manager/product_state.dart';
 import 'home_content_view.dart';
@@ -28,26 +32,26 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen>
     with SingleTickerProviderStateMixin {
   var cubit = di.sl<ProductCubit>();
-  List<ProductModel> products = [];
+  List<CategoryItem> categories = [];
   String iniCountry = '';
-  List<String> countries = [];
+  List<String> countries = ["EG" , "KW"];
   final int index = 0;
 
   @override
   void initState() {
-     di.sl<CountriesCubit>().getCurrentCountry().then((value) {
-      iniCountry = value.code;
-      print(
-          'initial Country ===========                        ========= > ${iniCountry}');
-    });
+    //  di.sl<CountriesCubit>().getCurrentCountry().then((value) {
+    //   iniCountry = value.code;
+    //   print(
+    //       'initial Country ===========                        ========= > ${iniCountry}');
+    // });
     //
 
-    di.sl<CountriesCubit>().getCountries().then((value) {
-      for (var country in value) {
-        countries.add(country.code);
-        print('country code ======= ? ${country.code}');
-      }
-    });
+    // di.sl<CountriesCubit>().getCountries().then((value) {
+    //   for (var country in value) {
+    //     countries.add(country.code);
+    //     print('country code ======= ? ${country.code}');
+    //   }
+    // });
     SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
       systemNavigationBarDividerColor: Color(0xff212121),
       systemNavigationBarColor: Color(0xff212121),
@@ -60,11 +64,11 @@ class _HomeScreenState extends State<HomeScreen>
     double w = MediaQuery.of(context).size.width;
     double h = MediaQuery.of(context).size.height * 0.7;
     return BlocProvider(
-      create: (context) => di.sl<ProductCubit>()..getProducts(),
-      child: BlocConsumer<ProductCubit, ProductsState>(
-        listener: (context, state) => di.sl<ProductCubit>(),
+      create: (context) => di.sl<CategoryCubit>()..getCategory(),
+      child: BlocConsumer<CategoryCubit, CategoryState>(
+        listener: (context, state) => di.sl<CategoryCubit>(),
         builder: (context, state) {
-          products = ProductCubit.get(context).products;
+          categories = CategoryCubit.get(context).category;
           Widget _body1() {
             if (state is ProductsLoading) {
               return const LoadingScreen();
@@ -79,7 +83,7 @@ class _HomeScreenState extends State<HomeScreen>
                 w: w,
                 h: h,
                 context: context,
-                products: products,
+                categories: categories,
                 countries: countries,
                 iniCountry: iniCountry,
               );

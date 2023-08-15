@@ -15,7 +15,7 @@ class GetAllCountriesUseCase implements UseCase<List<CountryEntity>, NoParams>{
   }
 
   @override
-  Future<Either<Failure, OnBoardingModel>> getAllOnBoarding(NoParams params) {
+  Future<Either<Failure, List<OnBoarding>>> getAllOnBoarding(NoParams params) {
     return  countriesRepo.getOnBoarding();
   }
 }

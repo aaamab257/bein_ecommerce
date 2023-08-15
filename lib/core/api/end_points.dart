@@ -7,18 +7,25 @@ class EndPoints {
   static const String BASE_URL =
       'http://3.127.147.186:8082/api/v1/';
 
+  static const String BASE_URL2 =
+      'https://sinyar-22b4577535a5.herokuapp.com';
+
   static const String COUNTRIES = '${BASE_URL}countries';
   static const String PRODUCTS = '${BASE_URL}app/products';
-  static const String CATEGORIES = '${BASE_URL}categories';
+  static const String CATEGORIES = '${BASE_URL2}/shop/api/categories/';
+  static const String SUBCATEGORIES = '${BASE_URL2}/shop/api/subCategory/';
+
 
   //userProfile
   static const String getProfile = '${BASE_URL}users';
 
   // Auth Apis
-  static const String login = '${BASE_URL}auth/login';
-  static const String register = '${BASE_URL}auth/register';
+  static const String login = '${BASE_URL2}/auth/login';
+  static const String register = '${BASE_URL2}/auth/register';
   static const String check_phone = '${BASE_URL}auth/check-phone';
   static const String check_mail = '${BASE_URL}auth/check-mail';
+
+  //
 
   //Cart Apis
   static const String NEWCART = '${BASE_URL}carts/new-cart';
@@ -38,6 +45,6 @@ class EndPoints {
   static const String socketURL = 'http://3.127.147.186:8082/ws';
 
   // offers
-  static const String getOffers = '${BASE_URL}adds';
-  static const String getOnBoarding = '${BASE_URL}onboarding';
+  static const String getOffers = '${BASE_URL2}/settings/offers';
+  static const String getOnBoarding = '${BASE_URL2}/settings/onBoarding';
 }

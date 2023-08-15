@@ -24,7 +24,7 @@ class CountriesCubit extends Cubit<CountriesState> {
   static CountriesCubit get(context) => BlocProvider.of(context);
 
   String currency = "" ;
-  OnBoardingModel? onBoardingModel ;
+  List<OnBoarding>? onBoardingModel ;
   String get getCurrency => currency ;
 
   List<CountryEntity> countries = [];
@@ -69,14 +69,14 @@ class CountriesCubit extends Cubit<CountriesState> {
          emit(GetCountrySelectionSuccess());
          countryEntity = country ;
          print('Cubit  ============================= ${countryEntity!.currency}');
-         currency = countryEntity!.currency ;
+         //currency = countryEntity!.currency ;
          return country ;
        }); 
   return countryEntity! ;
   }
 
 
-  Future<OnBoardingModel> getOnBoarding() async {
+  Future<List<OnBoarding>> getOnBoarding() async {
     emit(CountriesLoading());
     (await getAllCountriesUseCase.getAllOnBoarding(NoParams())).fold((failure) {
       debugPrint("uuuuuuuuuuu" +failure.toString());

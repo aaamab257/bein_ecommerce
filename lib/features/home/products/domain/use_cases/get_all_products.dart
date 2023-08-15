@@ -20,7 +20,7 @@ class GetAllProductsUseCase implements UseCase<List<ProductModel>, NoParams>{
 
 
   @override
-  Future<Either<Failure, OffersModel>> getOffers() {
+  Future<Either<Failure, List<Imgs>>> getOffers() {
     return  productRepo.getOffers();
   }
 }

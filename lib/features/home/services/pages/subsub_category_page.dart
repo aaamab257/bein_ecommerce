@@ -5,9 +5,11 @@ import 'package:flutter/src/widgets/placeholder.dart';
 
 import '../../../../config/localization/app_localization.dart';
 import '../../../requestes/presentation/widgets/current_requestes.dart';
+import '../../categories/data/models/sub_category_model.dart';
 
 class SubSubCategoryPage extends StatefulWidget {
-  const SubSubCategoryPage({super.key});
+  List<Product> products;
+  SubSubCategoryPage({super.key, required this.products});
 
   @override
   State<SubSubCategoryPage> createState() => _SubSubCategoryPageState();
@@ -120,7 +122,7 @@ class _SubSubCategoryPageState extends State<SubSubCategoryPage>
                     shrinkWrap: true,
                     padding:
                         const EdgeInsets.symmetric(horizontal: 5, vertical: 5),
-                    itemCount: 5,
+                    itemCount: widget.products.length,
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
@@ -131,7 +133,12 @@ class _SubSubCategoryPageState extends State<SubSubCategoryPage>
                       mainAxisExtent: 200,
                     ),
                     itemBuilder: (context, index) {
-                      return const SubSubCategoryItem();
+                      return SubSubCategoryItem(
+                        id: widget.products[index].id!,
+                        name: widget.products[index].name!,
+                        price: widget.products[index].price!,
+                        desc: widget.products[index].description!,
+                      );
                     },
                   ),
                 ),

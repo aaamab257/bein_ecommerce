@@ -36,8 +36,8 @@ class ProductsRepoImpl implements ProductsRepo {
   }
 
   @override
-  Future<Either<Failure, OffersModel>> getOffers() async {
-    OffersModel? offersModel ;
+  Future<Either<Failure, List<Imgs>>> getOffers() async {
+    List<Imgs>? offersModel ;
     if (await networkInfo.isConnected) {
       (await allProductsRemoteDataSource.getOffers()).fold((failure) {
         return Left(ServerFailure());

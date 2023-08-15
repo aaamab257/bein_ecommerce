@@ -166,28 +166,28 @@ class _OtpBodyState extends State<OtpBody> {
                                       } else if (_thController.text.isEmpty) {
                                       } else if (_foController.text.isEmpty) {
                                       } else {
-                                        String otp = _fController.text +
-                                            _sController.text +
-                                            _thController.text +
-                                            _foController.text;
-                                        LoginCubit.get(context)
-                                            .login(LoginRequest(
-                                                phoneNumber: widget.phone,
-                                                otpCode: otp))
-                                            .then((value) {
+                                        // String otp = _fController.text +
+                                        //     _sController.text +
+                                        //     _thController.text +
+                                        //     _foController.text;
+                                        // LoginCubit.get(context)
+                                        //     .login(LoginRequest(
+                                        //         phoneNumber: widget.phone,
+                                        //         otpCode: otp))
+                                        //     .then((value) {
 
-                                          di
-                                              .sl<LoginCubit>()
-                                              .saveToken(value)
-                                              .then((value) {
-                                            if (value) {
-                                              Navigator.pushNamedAndRemoveUntil(
-                                                  context,
-                                                  AppRouteName.home,
-                                                  (route) => false);
-                                            }
-                                          });
-                                        });
+                                        //   di
+                                        //       .sl<LoginCubit>()
+                                        //       .saveToken(value)
+                                        //       .then((value) {
+                                        //     if (value) {
+                                        //       Navigator.pushNamedAndRemoveUntil(
+                                        //           context,
+                                        //           AppRouteName.home,
+                                        //           (route) => false);
+                                        //     }
+                                        //   });
+                                        // });
                                       }
                                     },
                                     Text: Text(

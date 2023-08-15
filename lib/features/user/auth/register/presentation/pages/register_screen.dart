@@ -1,3 +1,6 @@
+import 'package:bein_ecommerce/core/shared_widgets/custom_snackbar.dart';
+import 'package:bein_ecommerce/features/user/auth/login/presentation/pages/login_page.dart';
+import 'package:bein_ecommerce/features/user/auth/register/data/models/register_model.dart';
 import 'package:bein_ecommerce/features/user/intresting/intrested_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -75,6 +78,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 CustomTextField(
+                  controller: _nameController,
                   hint:
                       AppLocalizations.of(context)?.translate("name") ?? "Name",
                   type: TextInputType.text,
@@ -99,6 +103,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 CustomTextField(
+                  controller: _emailController,
                   hint: AppLocalizations.of(context)?.translate("email") ??
                       "Email",
                   type: TextInputType.emailAddress,
@@ -113,6 +118,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 CustomTextField(
+                  controller: _password1Controller,
                   hint:
                       AppLocalizations.of(context)?.translate("password_txt") ??
                           "Password",
@@ -128,13 +134,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 CustomTextField(
+                  controller: _password2Controller,
                   hint:
                       AppLocalizations.of(context)?.translate("confirm_pass") ??
                           "Confirm Password",
                   type: TextInputType.text,
                   isPassword: true,
                 ),
-                
                 const SizedBox(
                   height: 35.0,
                 ),
@@ -149,11 +155,46 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 .translate('register') ??
                             "Register",
                         onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) => const IntrestedScreen()),
+                          if (_emailController.text.isEmpty) {
+                            showSnackBar(
+                                context,
+                                AppLocalizations.of(context)!
+                                        .translate('email_error') ??
+                                    "Please Enter your E-mail");
+                          } else if (_phoneController.text.isEmpty) {
+                            showSnackBar(
+                                context,
+                                AppLocalizations.of(context)!
+                                        .translate('phone_error') ??
+                                    "Please Enter your Phone Number");
+                          } else if (_nameController.text.isEmpty) {
+                            showSnackBar(
+                                context,
+                                AppLocalizations.of(context)!
+                                        .translate('Name_error') ??
+                                    "Please Enter your Name");
+                          } else if (_password1Controller.text.isEmpty) {
+                            showSnackBar(
+                                context,
+                                AppLocalizations.of(context)!
+                                        .translate('phone_error') ??
+                                    "Please Enter your Password");
+                          }
+                          RegisterModel registerModel = RegisterModel(
+                            name: _nameController.text,
+                            email: _emailController.text,
+                            phone: _nameController.text,
+                            is_admin: false,
+                            is_user: true,
+                            is_vendor: false,
+                            password: _password1Controller.text,
+                            password2: _password2Controller.text,
                           );
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //       builder: (context) => const IntrestedScreen()),
+                          // );
                         },
                       ),
                       const SizedBox(
@@ -172,7 +213,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             width: 8.0,
                           ),
                           TextButton(
-                            onPressed: () {},
+                            onPressed: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => LoginPage(
+                                          iniCountry: widget.iniCountry,
+                                          countries: widget.countries,
+                                        )),
+                              );
+                            },
                             child: Text(
                               AppLocalizations.of(context)!
                                       .translate('login') ??

@@ -4,7 +4,16 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter/src/widgets/placeholder.dart';
 
 class SubSubCategoryItem extends StatefulWidget {
-  const SubSubCategoryItem({super.key});
+  String name;
+  int id;
+  String price;
+  String desc;
+  SubSubCategoryItem(
+      {super.key,
+      required this.id,
+      required this.name,
+      required this.price,
+      required this.desc});
 
   @override
   State<SubSubCategoryItem> createState() => _SubSubCategoryItemState();
@@ -65,7 +74,7 @@ class _SubSubCategoryItemState extends State<SubSubCategoryItem> {
                         ],
                       ),
                       Text(
-                        'Yalla bena Trip',
+                        widget.desc,
                         style: Theme.of(context).textTheme.headlineSmall,
                       ),
                       Row(
@@ -79,7 +88,7 @@ class _SubSubCategoryItemState extends State<SubSubCategoryItem> {
                             size: 20,
                           ),
                           Text(
-                            'Travel Company',
+                            widget.name,
                             style: Theme.of(context).textTheme.headlineSmall,
                           ),
                         ],

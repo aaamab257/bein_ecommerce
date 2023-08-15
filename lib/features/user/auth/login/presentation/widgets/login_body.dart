@@ -12,6 +12,7 @@ import 'package:bein_ecommerce/di.dart' as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import '../../../../../../config/localization/app_localization.dart';
+import '../../../../../../config/route/app_routes.dart';
 import '../../../../../../core/shared_widgets/app_button.dart';
 import '../../../../../../core/shared_widgets/custom_snackbar.dart';
 import '../../../../../../core/shared_widgets/error_widgts.dart';
@@ -19,12 +20,13 @@ import '../../../../../../core/shared_widgets/loading_screen.dart';
 import '../../../../../../core/shared_widgets/solid_button.dart';
 import '../../../../../../core/utils/colors/colors_manager.dart';
 import '../../../otp/presentation/pages/otp_page.dart';
+import '../../data/models/login_request.dart';
 
 class LoginBody extends StatefulWidget {
-  String iniCountry = '';
+  String iniCountry;
   List<String> countries = [];
 
-  LoginBody({super.key, required this.countries, required this.iniCountry});
+  LoginBody({super.key, required this.countries, this.iniCountry = "EG"});
 
   @override
   State<LoginBody> createState() => _LoginBodyState();
@@ -34,7 +36,8 @@ class _LoginBodyState extends State<LoginBody> {
   FocusNode _emailFocus = FocusNode();
   FocusNode _phoneFocus = FocusNode();
   TextEditingController _phoneController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passController = TextEditingController();
+  
 
   GlobalKey<FormState> _formKeyLogin = GlobalKey<FormState>();
   bool email = false;
@@ -55,7 +58,7 @@ class _LoginBodyState extends State<LoginBody> {
 
   @override
   void dispose() {
-    _emailController.dispose();
+    _passController.dispose();
 
     super.dispose();
   }
@@ -139,6 +142,7 @@ class _LoginBodyState extends State<LoginBody> {
                                 ),
                               ),
                               CustomTextField(
+                                controller: _passController,
                                 hint: AppLocalizations.of(context)
                                         ?.translate("password_txt") ??
                                     "Password",
@@ -180,7 +184,18 @@ class _LoginBodyState extends State<LoginBody> {
                                               .translate('login') ??
                                           "Login",
                                       onPressed: () {
-                                        print('Pressed');
+                                        String phone = _phoneController.text;
+                                        print('phone : ======== > $phone');
+                                        LoginCubit.get(context)
+                                            .login(LoginRequest(
+                                                phoneNumber: phone,
+                                                password: _passController.text))
+                                            .then((value) {
+                                          Navigator.pushNamedAndRemoveUntil(
+                                              context,
+                                              AppRouteName.home,
+                                              (route) => false);
+                                        });
                                       },
                                     ),
                                     const SizedBox(

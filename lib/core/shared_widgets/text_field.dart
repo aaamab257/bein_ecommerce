@@ -4,7 +4,8 @@ class CustomTextField extends StatelessWidget {
   final String hint;
   final TextInputType type;
   final bool isPassword ;
-  const CustomTextField({super.key,required this.isPassword , required this.hint, required this.type});
+  final TextEditingController controller ;
+  const CustomTextField({super.key,required this.isPassword , required this.hint, required this.type , required this.controller});
 
   @override
   Widget build(BuildContext context) {
@@ -14,6 +15,7 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: TextField(
+        controller: controller,
         keyboardType: type,
         decoration: InputDecoration(
           filled: true,

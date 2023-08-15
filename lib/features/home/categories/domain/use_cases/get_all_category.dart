@@ -4,12 +4,18 @@ import 'package:dartz/dartz.dart';
 
 import '../../../../../core/error/failures.dart';
 import '../../../../../core/usecase/usecase.dart';
+import '../../data/models/sub_category_model.dart';
 
-class GetAllCategoryUseCase implements UseCase<List<CategoryItem>, NoParams>{
+class GetAllCategoryUseCase implements UseCase<List<CategoryItem>, NoParams> {
   CategoryRepo categoryRepo;
-  GetAllCategoryUseCase({required this.categoryRepo });
+  GetAllCategoryUseCase({required this.categoryRepo});
   @override
   Future<Either<Failure, List<CategoryItem>>> call(NoParams params) {
-    return  categoryRepo.getAllCategory();
+    return categoryRepo.getAllCategory();
+  }
+
+  @override
+  Future<Either<Failure, List<SubCategoryModel>>> subCategory(int id) {
+    return categoryRepo.getAllSubCategory(id);
   }
 }

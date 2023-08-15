@@ -31,14 +31,16 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
     try {
       Map<String, dynamic> response = await apiConsumer.post(
           EndPoints.login,
-          {"phoneNumber": request.phoneNumber, "otpCode": request.otpCode},
+          {"phone": request.phoneNumber, "password": request.password},
           Options(
             headers: {
               'Accept-Language': "en",
             },
           ));
 
-      String token = response["token"];
+      String token = response["Token"]["access"];
+
+      print("Tokeeeeeeeeeeeeeeeeeeeeeeeeeeeeen ====================== > $token");
 
       return right(token);
     } on Exception catch (e) {

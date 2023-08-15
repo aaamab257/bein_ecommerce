@@ -1,3 +1,4 @@
+import 'package:bein_ecommerce/config/route/app_routes.dart';
 import 'package:bein_ecommerce/core/shared_widgets/app_button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
@@ -13,7 +14,6 @@ class IntrestedScreen extends StatefulWidget {
 }
 
 class _IntrestedScreenState extends State<IntrestedScreen> {
-  
   Set<int> _selectedIndices = Set<int>();
 
   void _toggleSelection(int index) {
@@ -28,14 +28,13 @@ class _IntrestedScreenState extends State<IntrestedScreen> {
 
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size; 
+    var size = MediaQuery.of(context).size;
     return Scaffold(
       body: Padding(
         padding: const EdgeInsetsDirectional.only(start: 16.0, end: 16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           mainAxisAlignment: MainAxisAlignment.center,
-          
           children: [
             Padding(
               padding: const EdgeInsetsDirectional.only(start: 20.0, end: 20.0),
@@ -73,8 +72,7 @@ class _IntrestedScreenState extends State<IntrestedScreen> {
                   onTap: () => _toggleSelection(index),
                   child: Card(
                     elevation: 3.0,
-                    color:
-                        isSelected ? const Color(0xff6D2D83) : Colors.white,
+                    color: isSelected ? const Color(0xff6D2D83) : Colors.white,
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ),
@@ -92,13 +90,16 @@ class _IntrestedScreenState extends State<IntrestedScreen> {
                 );
               },
             ),
-           const SizedBox(
+            const SizedBox(
               height: 20,
             ),
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 100 , vertical: 50),
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 100, vertical: 50),
               child: AppButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pushNamed(context, AppRouteName.home);
+                  },
                   buttonTxt:
                       AppLocalizations.of(context)!.translate('start_now') ??
                           "Start"),

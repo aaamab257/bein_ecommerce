@@ -22,34 +22,28 @@ class CategoryModel {
 }
 
 class CategoryItem {
-  String? id;
+  int? id;
   String? name;
-  String? arName;
-  String? status;
-  String? createdDate;
+  String? image;
 
-  CategoryItem(
-      {required this.id,
-      required this.arName,
-      required this.createdDate,
-      required this.name,
-      required this.status});
+  CategoryItem({
+    required this.id,
+    required this.image,
+    required this.name,
+  });
 
   CategoryItem.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
-    arName = json['arName'];
-    status = json['status'];
-    createdDate = json['createdDate'];
+    image = json['image'];
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
     data['id'] = id;
     data['name'] = name;
-    data['arName'] = arName;
-    data['status'] = status;
-    data['createdDate'] = createdDate;
+    data['image'] = image ;
+
     return data;
   }
 

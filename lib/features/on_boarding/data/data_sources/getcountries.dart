@@ -8,11 +8,12 @@ import 'package:devicelocale/devicelocale.dart';
 import 'package:bein_ecommerce/di.dart' as di;
 import '../../../../core/error/failures.dart';
 import '../../../splash/presentation/localization/local_bloc/local_cubit.dart';
+import '../models/onboarding.dart';
 
 abstract class CountriesRemoteDataSource {
   Future<Either<Failure, List<CountryModel>>> getAllCountries();
 
-  Future<Either<Failure, OnBoardingModel>> getOnBoarding();
+  Future<Either<Failure, List<OnBoarding>>> getOnBoarding();
 }
 
 class CountriesRemoteDataSourceImpl implements CountriesRemoteDataSource {
@@ -45,27 +46,18 @@ class CountriesRemoteDataSourceImpl implements CountriesRemoteDataSource {
   }
 
   @override
-  Future<Either<Failure, OnBoardingModel>> getOnBoarding() async {
-    String? lang = "";
-
-    await di.sl<LocaleCubit>().getCurrentLang().then((value) {
-      lang = value;
-      print(' on boarding ======================= > lang ============= $value');
-    });
+  Future<Either<Failure, List<OnBoarding>>> getOnBoarding() async {
     try {
       Map<String, dynamic> response = await apiConsumer.get(
           EndPoints.getOnBoarding,
           Options(
             headers: {
-              'Accept-Language': lang,
+              'Accept-Language': 'en',
             },
           ));
+      List<dynamic> dynamicList = response['onBoarding'];
 
-      dynamic id = response['id'];
-      List<dynamic> images = response['enImages'];
-      List<Imgs> imgs = images.map((image) => Imgs.fromJson(image)).toList();
-      OnBoardingModel onBoardingModel = OnBoardingModel(id: id, images: imgs);
-      return right(onBoardingModel);
+      return right(dynamicList.map((country) => OnBoarding.fromJson(country)).toList());
     } on Exception catch (e) {
       print(e.toString());
     }

@@ -153,10 +153,10 @@ class CartCubit extends Cubit<CartState> {
   Future<List<CartModel>> getCart() async {
     String cartID = await getCartId();
     emit(CartLoading());
-    await di.sl<CountriesCubit>().getCurrentCountry().then((value) {
-      currency = value.currency;
-      print('currency =============================> ${value.currency}');
-    });
+    // await di.sl<CountriesCubit>().getCurrentCountry().then((value) {
+    //   currency = value.currency;
+    //   print('currency =============================> ${value.currency}');
+    // });
     (await cartUseCase.callGetCart(cartID)).fold((failure) {
       debugPrint("uuuuuuuuuuu" + failure.toString());
       emit(CartError());

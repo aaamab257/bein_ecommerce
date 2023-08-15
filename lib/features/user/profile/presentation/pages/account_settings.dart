@@ -32,6 +32,7 @@ class _AccountSettingsState extends State<AccountSettings> {
 
   @override
   Widget build(BuildContext context) {
+    
     return SafeArea(
       child: Scaffold(
           body: SingleChildScrollView(
@@ -176,34 +177,38 @@ class _AccountSettingsState extends State<AccountSettings> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(15),
                 ),
-                child: InkWell(
-                  onTap: () async {
-                    setState(() async {
-                      !isChanged
-                          ? BlocProvider.of<ChangeThemeBloc>(context)
-                              .add(LightThemeEvent())
-                          : BlocProvider.of<ChangeThemeBloc>(context)
-                              .add(DarkThemeEvent());
+                child: ListTile(
+                  leading: Icon(
+                    color: Theme.of(context).iconTheme.color,
+                    Icons.dark_mode,
+                  ),
+                  title: Text(
+                    AppLocalizations.of(context)?.translate('dark_mode') ??
+                        "dark_mode",
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
+                  trailing: Switch(
+                    thumbColor: Theme.of(context).switchTheme.thumbColor,
+                    trackColor: Theme.of(context).switchTheme.trackColor,
+                    overlayColor: Theme.of(context).switchTheme.overlayColor,
+                    value: isChanged ,
 
-                      isChanged = !isChanged;
-                    });
-                    await saveThemeMode(
-                        !isChanged ? ThemeMode.light : ThemeMode.dark);
-                  },
-                  child: ListTile(
-                    leading: Icon(
-                      color: Theme.of(context).iconTheme.color,
-                      Icons.dark_mode,
-                    ),
-                    title: Text(
-                      AppLocalizations.of(context)?.translate('dark_mode') ??
-                          "dark_mode",
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                    trailing: Icon(
-                      color: Theme.of(context).iconTheme.color,
-                      Icons.brightness_4,
-                    ),
+                    // changes the state of the switch
+                    onChanged: (value) {
+                      setState(() {
+                        //isChanged = value;
+                        !value
+                            ? BlocProvider.of<ChangeThemeBloc>(context)
+                                .add(LightThemeEvent())
+                            : BlocProvider.of<ChangeThemeBloc>(context)
+                                .add(DarkThemeEvent());
+                        isChanged = value;
+                        value = !value;
+                        print(value);
+                        saveThemeMode(
+                            !isChanged ? ThemeMode.light : ThemeMode.dark);
+                      });
+                    },
                   ),
                 ),
               ),

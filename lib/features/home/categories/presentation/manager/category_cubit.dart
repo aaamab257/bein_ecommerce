@@ -9,25 +9,26 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../../core/usecase/usecase.dart';
 import '../../../../on_boarding/domain/entities/countries_entity.dart';
+import '../../data/models/sub_category_model.dart';
 import 'category_state.dart';
 
-class CategoryCubit extends Cubit<CategoryState>{
- final GetAllCategoryUseCase getAllCategoryUseCase;
-  
+class CategoryCubit extends Cubit<CategoryState> {
+  final GetAllCategoryUseCase getAllCategoryUseCase;
 
   CategoryCubit({
     required this.getAllCategoryUseCase,
-    
-  }): super(CategoryInitial());
+  }) : super(CategoryInitial());
 
   static CategoryCubit get(context) => BlocProvider.of(context);
 
   List<CategoryItem> category = [];
 
+  List<SubCategoryModel> subCategory = [];
+
   Future<List<CategoryItem>> getCategory() async {
     emit(CategoryLoading());
     (await getAllCategoryUseCase.call(NoParams())).fold((failure) {
-      debugPrint("uuuuuuuuuuu" +failure.toString());
+      debugPrint("uuuuuuuuuuu" + failure.toString());
       emit(CategoryError());
     }, (category) {
       debugPrint(category.toString());
@@ -37,4 +38,16 @@ class CategoryCubit extends Cubit<CategoryState>{
     return category;
   }
 
+  Future<List<SubCategoryModel>> getSubCategory(int id) async {
+    emit(CategoryLoading());
+    (await getAllCategoryUseCase.subCategory(id)).fold((failure) {
+      debugPrint("uuuuuuuuuuu" + failure.toString());
+      emit(CategoryError());
+    }, (subcategory) {
+      debugPrint(category.toString());
+      subCategory = subcategory;
+      emit(CategorySuccess());
+    });
+    return subCategory;
+  }
 }

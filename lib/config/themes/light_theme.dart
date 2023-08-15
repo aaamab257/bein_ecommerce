@@ -25,11 +25,17 @@ final ThemeData lightTheme = ThemeData(
     color: Color(0xffE0E3EA),
     thickness: 4.0,
     indent: 16.0,
-    
     endIndent: 16.0,
   ),
+  switchTheme: SwitchThemeData(
+    // Customize the colors
+    splashRadius: 50,
+    thumbColor: MaterialStateProperty.all(const Color(0xffA5CD39)),
+    trackColor: MaterialStateProperty.all(Colors.grey),
+    overlayColor: MaterialStateProperty.all(Colors.blue.withOpacity(0.5)),
+  ),
   floatingActionButtonTheme: const FloatingActionButtonThemeData(
-    backgroundColor: Color(0xffFFFFFF),
+    backgroundColor: Color(0xff88489E),
     foregroundColor: Color(0xffA5CD39),
     elevation: 4.0,
   ),
@@ -60,7 +66,7 @@ final ThemeData lightTheme = ThemeData(
       fontFamily: 'Cairo',
     ),
     bodySmall: TextStyle(
-        fontSize: 14.0, color: Color(0xffFFFFFF), fontFamily: 'Cairo' ),
+        fontSize: 14.0, color: Color(0xffFFFFFF), fontFamily: 'Cairo'),
   ),
   cardTheme: CardTheme(
     color: const Color(0xffFFFFFF),

@@ -11,6 +11,7 @@ import 'package:bein_ecommerce/di.dart' as di;
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../../../config/localization/app_localization.dart';
 import '../../../../config/route/app_routes.dart';
+import '../../../../core/api/end_points.dart';
 import '../../../../core/shared_widgets/error_widgts.dart';
 import '../../../../core/shared_widgets/loading_screen.dart';
 import '../../../../core/utils/colors/colors_manager.dart';
@@ -45,33 +46,13 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
   final PageController _pageController = PageController(initialPage: 0);
   String cartId = "";
   var cubit = di.sl<CartCubit>();
-  OnBoardingModel? onBoardingModel;
+  List<OnBoarding>? onBoardingModel;
 
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => di.sl<CartCubit>()..newCart(),
-      child: BlocConsumer<CartCubit, CartState>(
-        listener: (context, state) => di.sl<CartCubit>(),
-        builder: (context, state) {
-          cartId = CartCubit.get(context).cart_id;
-          di.sl<CartCubit>().saveCartIdToLocalDB(cartId).then((value) {
-            print('isSaved = ${value}');
-          });
-          di.sl<CartCubit>().getCartId().then((value) {
-            print('Cart ID from onBo = ${value}');
-          });
-          Widget _body1() {
-            if (state is CartLoading) {
-              return const LoadingScreen();
-            } else if (state is CartError) {
-              return AppErrorWidget(
-                onPress: () {
-                  setState(() {});
-                },
-              );
-            } else {
-              return BlocProvider(
+      child:BlocProvider(
                 create: (context) => di.sl<CountriesCubit>()..getOnBoarding(),
                 child: BlocConsumer<CountriesCubit, CountriesState>(
                   listener: (context, state) => di.sl<CountriesCubit>(),
@@ -99,7 +80,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                     child: PageView.builder(
                                       controller: _pageController,
                                       itemCount:
-                                          onBoardingModel!.images!.length,
+                                          onBoardingModel!.length,
                                       onPageChanged: (idx) {
                                         setState(() {
                                           _currentPage = idx;
@@ -107,18 +88,34 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                       },
                                       itemBuilder: (context, idx) {
                                         final item =
-                                            onBoardingModel!.images![idx];
+                                            onBoardingModel![idx].image!;
                                         return Column(
                                           children: [
+                                            Expanded(
+                                              flex: 3,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(32.0),
+                                                child: Image.network(
+                                                  '${EndPoints.BASE_URL2}$item',
+                                                  fit: BoxFit.contain,
+                                                ),
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(32.0),
+                                                child: Text(onBoardingModel![idx].title! , style: Theme.of(context).textTheme.headlineMedium,)
+                                              ),
+                                            ),
                                             Expanded(
                                               flex: 2,
                                               child: Padding(
                                                 padding:
                                                     const EdgeInsets.all(32.0),
-                                                child: Image.network(
-                                                  item.url!,
-                                                  fit: BoxFit.contain,
-                                                ),
+                                                child: Text(onBoardingModel![idx].desc! , style: Theme.of(context).textTheme.headlineSmall,)
                                               ),
                                             ),
                                           ],
@@ -130,12 +127,12 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                   // Current page indicator
                                   Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children: widget.pages
+                                    children: onBoardingModel!
                                         .map((item) => AnimatedContainer(
                                               duration: const Duration(
                                                   milliseconds: 250),
                                               width: _currentPage ==
-                                                      widget.pages.indexOf(item)
+                                                      onBoardingModel!.indexOf(item)
                                                   ? 20
                                                   : 4,
                                               height: 4,
@@ -147,6 +144,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                                           10.0)),
                                             ))
                                         .toList(),
+                                        
                                   ),
 
                                   // Bottom buttons
@@ -160,7 +158,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                             onPressed: () {
                                               Navigator.pushNamedAndRemoveUntil(
                                                   context,
-                                                  AppRouteName.country,
+                                                  AppRouteName.home,
                                                   (route) => false);
                                             },
                                             child: Text(
@@ -177,7 +175,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                                                 widget.pages.length - 1) {
                                               Navigator.pushNamedAndRemoveUntil(
                                                   context,
-                                                  AppRouteName.country,
+                                                  AppRouteName.home,
                                                   (route) => false);
                                             } else {
                                               _pageController.animateToPage(
@@ -218,16 +216,7 @@ class _OnBoardingScreenState extends State<OnBoardingScreen> {
                     );
                   },
                 ),
-              );
-            }
-          }
-
-          return Scaffold(
-            backgroundColor: ColorsManager.background,
-            body: _body1(),
-          );
-        },
-      ),
+              ),
     );
   }
 }

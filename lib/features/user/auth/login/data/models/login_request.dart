@@ -1,9 +1,9 @@
 class LoginRequest {
   String phoneNumber;
-  String otpCode;
+  String password;
 
 
-  LoginRequest({required this.phoneNumber, required this.otpCode});
+  LoginRequest({required this.phoneNumber, required this.password});
 
   /*{
     "phoneNumber":"01016348221",

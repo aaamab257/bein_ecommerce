@@ -59,8 +59,8 @@ class CountryRepoImpl implements CountriesRepo {
   }
 
   @override
-  Future<Either<Failure, OnBoardingModel>> getOnBoarding() async {
-    OnBoardingModel? onBoardingModel ;
+  Future<Either<Failure, List<OnBoarding>>> getOnBoarding() async {
+    List<OnBoarding>? onBoardingModel ;
     if (await networkInfo.isConnected) {
       (await countriesRemoteDataSource.getOnBoarding()).fold((failure) {
         return Left(ServerFailure());

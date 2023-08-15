@@ -51,7 +51,7 @@ class _ServicesScreenState extends State<ServicesScreen> {
                             PageRouteBuilder(
                                 pageBuilder:
                                     (context, animation, secondaryAnimation) =>
-                                        const SubCategoryScreen(),
+                                         SubCategoryScreen(id: 1,),
                                 transitionDuration:
                                     const Duration(milliseconds: 300),
                                 transitionsBuilder: (context, animation,

@@ -8,6 +8,6 @@ abstract class CountriesRepo{
   Future<Either<Failure, List<CountryEntity>>> getAllCountry();
   Future<Either<Failure, bool>> saveCountrySelection(CountryEntity countryEntity);
   Future<Either<Failure, CountryEntity>> getCountrySelection();
-  Future<Either<Failure, OnBoardingModel>> getOnBoarding();
+  Future<Either<Failure, List<OnBoarding>>> getOnBoarding();
 }
 

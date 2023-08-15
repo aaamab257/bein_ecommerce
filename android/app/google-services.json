@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "720698579670",
+    "project_id": "seniar",
+    "storage_bucket": "seniar.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:720698579670:android:5035744f9d8d689a964777",
+        "android_client_info": {
+          "package_name": "com.beintrack.bein_ecommerce"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "720698579670-8fer766n7af2c03blckah2sbkt6moitd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDwCwkoRIof_9Me1oJthhuENCryYZI5A20"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "720698579670-8fer766n7af2c03blckah2sbkt6moitd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

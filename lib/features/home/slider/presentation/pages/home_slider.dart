@@ -22,7 +22,7 @@ class HomeSlider extends StatefulWidget {
 }
 
 class _HomeSliderState extends State<HomeSlider> {
-  OffersModel offersModel = OffersModel();
+  List<Imgs> offersModel = [];
   List<Widget> imgs = [];
 
   @override
@@ -35,8 +35,7 @@ class _HomeSliderState extends State<HomeSlider> {
           builder: (context, state) {
             imgs = OffersCubit.get(context).imgs;
             offersModel = OffersCubit.get(context).offersModel;
-            debugPrint(
-                'offer Model ============================ ${offersModel.id}');
+            
 
             Widget _body1() {
               if (state is OffersLoading) {

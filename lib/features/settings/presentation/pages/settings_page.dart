@@ -116,30 +116,23 @@ class _SettingsPageState extends State<SettingsPage> {
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(5),
               ),
-              child: InkWell(
-                onTap: () async {
-                  setState(() async {
-                    !isChanged
-                        ? BlocProvider.of<ChangeThemeBloc>(context)
-                            .add(LightThemeEvent())
-                        : BlocProvider.of<ChangeThemeBloc>(context)
-                            .add(DarkThemeEvent());
+              child: ListTile(
+                leading: const Icon(
+                  Icons.dark_mode,
+                ),
+                title: Text(
+                    AppLocalizations.of(context)?.translate('dark_mode') ??
+                        "dark_mode"),
+                trailing: Switch(
+                  activeColor: Colors.amber,
+                  activeTrackColor: Colors.cyan,
+                  inactiveThumbColor: Colors.blueGrey.shade600,
+                  inactiveTrackColor: Colors.grey.shade400,
+                  splashRadius: 50.0,
+                  value: false,
 
-                    isChanged = !isChanged;
-                  });
-                  await saveThemeMode(
-                      !isChanged ? ThemeMode.light : ThemeMode.dark);
-                },
-                child: ListTile(
-                  leading: const Icon(
-                    Icons.dark_mode,
-                  ),
-                  title: Text(
-                      AppLocalizations.of(context)?.translate('dark_mode') ??
-                          "dark_mode"),
-                  trailing: const Icon(
-                    Icons.brightness_4,
-                  ),
+                  // changes the state of the switch
+                  onChanged: (value) {},
                 ),
               ),
             ),
@@ -149,3 +142,12 @@ class _SettingsPageState extends State<SettingsPage> {
     );
   }
 }
+// !isChanged
+//                       ? BlocProvider.of<ChangeThemeBloc>(context)
+//                           .add(LightThemeEvent())
+//                       : BlocProvider.of<ChangeThemeBloc>(context)
+//                           .add(DarkThemeEvent());
+
+//                   isChanged = !isChanged;
+
+//                   saveThemeMode(!isChanged ? ThemeMode.light : ThemeMode.dark);

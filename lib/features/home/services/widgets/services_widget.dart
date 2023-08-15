@@ -22,8 +22,8 @@ class ServicesWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(title, style: Theme.of(context).textTheme.headlineSmall),
-          const SizedBox(height: 10),
-          Image.asset(
+          const SizedBox(height: 0),
+          Image.network(
             imagePath,
             height: 80,
             width: 80,

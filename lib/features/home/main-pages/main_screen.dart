@@ -82,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
       body: Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: buildFloatingActionButton(),
       bottomNavigationBar: AnimatedBottomNavigationBar.builder(
         itemCount: 4,
@@ -115,7 +115,7 @@ class _MainScreenState extends State<MainScreen> {
         key: _bottomNavigationKey,
         height: 80,
         activeIndex: _selectedIndex,
-        gapLocation: GapLocation.none,
+        gapLocation: GapLocation.center,
         notchSmoothness: NotchSmoothness.verySmoothEdge,
         onTap: (index) {
           _onItemTapped(index);
@@ -126,6 +126,7 @@ class _MainScreenState extends State<MainScreen> {
 
   FloatingActionButton buildFloatingActionButton() {
     return FloatingActionButton(
+      
       onPressed: () async {
         _onItemTapped(0);
         //AllProductsRemoteDataSourceImpl(apiConsumer: di.sl()).getAllProducts();
@@ -133,6 +134,7 @@ class _MainScreenState extends State<MainScreen> {
       child: const Icon(
         Icons.chat_bubble_outline_outlined,
       ),
+      
     );
   }
 }

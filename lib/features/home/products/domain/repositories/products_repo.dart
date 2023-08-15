@@ -8,5 +8,5 @@ import '../../data/models/slider_model.dart';
 
 abstract class ProductsRepo{
   Future<Either<Failure, List<ProductModel>>> getAllProduct();
-  Future<Either<Failure, OffersModel>> getOffers();
+  Future<Either<Failure, List<Imgs>>> getOffers();
 }
